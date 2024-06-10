@@ -10,7 +10,7 @@ export default async function handler(request, response) {
     const user = await db.collection("users").findOne({ username });
 
     if (user && user.password === password) {
-      response.status(200);
+      response.status(200).json({ userId: user._id });
     } else {
       response.status(401);
     }
