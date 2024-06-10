@@ -14,7 +14,7 @@ export default function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
-      <Link href="/">Register here</Link>
+      <Link href="/register">Register here</Link>
     </>
   );
 }
