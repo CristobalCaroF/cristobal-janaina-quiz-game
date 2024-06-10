@@ -32,6 +32,7 @@ export default function RegisterForm() {
 
   return (
     <>
+      <h1>New User</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="user-input">Enter your Name:</label>
         <input
