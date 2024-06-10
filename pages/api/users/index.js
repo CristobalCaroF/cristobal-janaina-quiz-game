@@ -1,5 +1,5 @@
 import dbConnect from "@/db/dbConnect";
-import Register from "@/db/models/Register";
+import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -7,12 +7,13 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const registerData = request.body;
-      await Register.create(registerData);
-
-      response.status(201).json({ status: "User created" });
+      console.log("registerData", registerData);
+      const register = new User(registerData);
+      await register.save();
+      return response.status(201).json({ status: "Register created." });
     } catch (error) {
       console.log(error);
-      response.status(400).json({ error: error.message });
+      response.status(404).json({ error: error.message });
     }
   }
 }
