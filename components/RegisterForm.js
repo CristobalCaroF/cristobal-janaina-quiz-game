@@ -5,7 +5,6 @@ import Link from "next/link";
 // const fetcher = (...args) => fetch(args).then((res) => res.json());
 
 export default function RegisterForm() {
-  const { data } = useSWR("/api/users");
   const router = useRouter();
 
   async function handleSubmit(event) {
@@ -14,8 +13,6 @@ export default function RegisterForm() {
     const formData = new FormData(event.target);
     const registerData = Object.fromEntries(formData);
 
-    router.push("/");
-
     const response = await fetch("/api/users", {
       method: "POST",
       headers: {
@@ -23,14 +20,13 @@ export default function RegisterForm() {
       },
       body: JSON.stringify(registerData),
     });
+    const data = await response.json();
 
-    if (!response.ok) {
-      console.error(response.status);
-      return;
-    }
-
-    if (!data) {
-      return;
+    if (response.status === 201) {
+      alert(data.message);
+      router.push("/");
+    } else if (response.status === 409) {
+      alert(data.message);
     }
   }
 

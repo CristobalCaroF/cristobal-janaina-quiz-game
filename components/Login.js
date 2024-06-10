@@ -6,11 +6,11 @@ export default function Login() {
       <form>
         <div>
           <label>Username:</label>
-          <input type="text" value="" />
+          <input type="text" />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" value="" />
+          <input type="password" />
         </div>
         <button type="submit">Login</button>
       </form>
