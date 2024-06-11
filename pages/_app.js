@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import GlobalStyle from "../styles.js";
+import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
 
@@ -10,7 +10,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <SWRConfig>
-        {/* <GlobalStyle /> */}
+        <GlobalStyle />
         <Component {...pageProps} />
       </SWRConfig>
     </SessionProvider>
