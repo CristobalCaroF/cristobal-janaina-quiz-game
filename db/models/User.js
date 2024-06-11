@@ -2,13 +2,12 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const registerSchema = new Schema({
+const userSchema = new Schema({
   username: { type: String, required: true },
   password: { type: Number, required: true },
   email: { type: String, required: true },
 });
 
-const Register =
-  mongoose.models.Register || mongoose.model("Register user", registerSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-export default Register;
+export default User;
