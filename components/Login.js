@@ -1,6 +1,7 @@
 import Link from "next/link";
+import LoginButton from "./LoginButton";
 
-export default function Login({ onLogin }) {
+export default function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -14,11 +15,6 @@ export default function Login({ onLogin }) {
       },
       body: JSON.stringify(registerData),
     });
-
-    if (response.ok) {
-      const data = await response.json();
-      onLogin(data.userId);
-    }
   }
 
   return (
@@ -50,6 +46,7 @@ export default function Login({ onLogin }) {
           />
         </div>
         <button type="submit">Login</button>
+        <LoginButton />
       </form>
       <Link href="/register">Register here</Link>
     </>
