@@ -1,20 +1,18 @@
 import { useState } from "react";
 // import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
-  const [userId, setUserId] = useState("");
-
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <SWRConfig>
-      {/* <GlobalStyle /> */}
-      <Component
-        {...pageProps}
-        userId={userId}
-        onLogin={(userId) => {
-          setUserId(userId);
-        }}
-      />
-    </SWRConfig>
+    <SessionProvider session={session}>
+      <SWRConfig>
+        {/* <GlobalStyle /> */}
+        <Component {...pageProps} />
+      </SWRConfig>
+    </SessionProvider>
   );
 }
