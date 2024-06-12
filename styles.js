@@ -10,10 +10,13 @@ export default createGlobalStyle`
  
 
   body {
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     font-family: system-ui;
     padding: 2rem;
     background-color: rgb(151, 108, 192);
+    
   }
 `;
 
