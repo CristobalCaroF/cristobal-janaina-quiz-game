@@ -17,7 +17,7 @@ const NavProfile = styled.nav`
 export default function Nav() {
   return (
     <NavProfile>
-      <Link href="#">
+      <Link href="/profile">
         <Image priority src={userIcon} alt="profile" />
       </Link>
     </NavProfile>
