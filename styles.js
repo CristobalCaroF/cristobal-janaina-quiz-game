@@ -13,6 +13,7 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
     padding: 2rem;
+    background-color: rgb(151, 108, 192);
   }
 `;
 
