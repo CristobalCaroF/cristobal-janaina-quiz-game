@@ -1,9 +1,10 @@
 // import styled from "styled-components";
-import Card from "@/components/Card";
+// import Card from "@/components/Card";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
+import { useRouter } from "next/router";
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
@@ -17,8 +18,9 @@ export default function Quiz() {
     wrongAnswers: 0,
     score: 0,
   });
+  const router = useRouter();
 
-  const { data, error, isLoading } = useSWR("/api/questions", fetcher);
+  const { data, error, isLoading, mutate } = useSWR("/api/questions", fetcher);
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -68,6 +70,9 @@ export default function Quiz() {
   return (
     <div>
       <h1>Friends Quiz</h1>
+      <button type="button" onClick={() => router.back()}>
+        Quit quiz
+      </button>
       <div>
         <h2>
           Question: {activeQuestion + 1}
