@@ -18,5 +18,13 @@
     "react-dom": "^18",
     "styled-components": "^6.1.11",
     "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "eslint-plugin-react": "^7.34.2",
+    "globals": "^15.4.0",
+    "prettier": "3.3.2"
   }
 }
