@@ -3,7 +3,10 @@ import Image from "next/image";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import DarkModeToggle from "@/components/DarkModeToggle";
+
 import useSWR from "swr";
+import { useRouter } from "next/router";
+
 
 async function uploadFile(urlPath, { arg }) {
   await fetch(urlPath.join(""), {
@@ -20,13 +23,13 @@ const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
 
 export default function ProfilePage() {
   const { data: session } = useSession();
-
   const [avatarImage, setAvatarImage] = useState();
 
   const { trigger } = useSWRMutation(
     ["/api/profile/", session?.user?.name, "/avatar"],
     uploadFile
   );
+  const router = useRouter();
 
   const { data: scores } = useSWR(
     ["/api/profile/", session?.user?.name, "/score"],
@@ -60,6 +63,12 @@ export default function ProfilePage() {
 
   return (
     <>
+      <h1>Profile</h1>
+      <div>
+        <button type="button" onClick={() => router.back()}>
+          Home
+        </button>
+      </div>
       <Image
         // src={`/api/profile/${session.user?.name}/avatar`}
         src={session.user?.image}
