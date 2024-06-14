@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 async function uploadFile(urlPath, { arg }) {
   await fetch(urlPath.join(""), {
@@ -62,6 +63,8 @@ export default function ProfilePage() {
         <input type="file" name="file" onChange={handleChangeAvatar} />
         <button>Upload</button>
       </form>
+
+      <DarkModeToggle />
     </>
   );
 }
