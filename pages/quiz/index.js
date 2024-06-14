@@ -1,5 +1,5 @@
 // import styled from "styled-components";
-import Card from "@/components/Card";
+
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Link from "next/link.js";
