@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     await dbConnect();
     const scores = await Scores.find({
-      username: req.query.username,
+      username: request.query.username,
     }).exec();
 
     return response.status(200).json(scores);
