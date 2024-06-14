@@ -33,6 +33,7 @@ export default function Quiz() {
         let idx = Math.floor(Math.random() * data.length);
         selectedQuestions.push(data[idx]);
         data.splice(idx, 1);
+        console.log(data.length);
       }
 
       setQuestions(selectedQuestions);
