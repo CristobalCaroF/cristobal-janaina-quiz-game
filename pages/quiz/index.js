@@ -4,6 +4,8 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
@@ -17,8 +19,10 @@ export default function Quiz() {
     wrongAnswers: 0,
     score: 0,
   });
+  const router = useRouter();
+  const { data: session } = useSession();
 
-  const { data, error, isLoading } = useSWR("/api/questions", fetcher);
+  const { data, error, isLoading, mutate } = useSWR("/api/questions", fetcher);
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -29,6 +33,7 @@ export default function Quiz() {
         let idx = Math.floor(Math.random() * data.length);
         selectedQuestions.push(data[idx]);
         data.splice(idx, 1);
+        console.log(data.length);
       }
 
       setQuestions(selectedQuestions);
@@ -46,6 +51,25 @@ export default function Quiz() {
     }
   };
 
+  async function addScore(result) {
+    console.log("stored result");
+    const today = new Date();
+    const finalDate = today.toISOString().split("T")[0];
+    const response = await fetch("/api/scores", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: session.user.name,
+        score: result.score,
+        date: finalDate,
+      }),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+  }
+
   const nextQuestion = () => {
     setResult((prev) =>
       selectedAnswer
@@ -61,6 +85,7 @@ export default function Quiz() {
     } else {
       setActiveQuestion(0);
       setShowResult(true);
+      addScore(result);
     }
     setChecked(false);
   };
@@ -68,6 +93,9 @@ export default function Quiz() {
   return (
     <div>
       <h1>Friends Quiz</h1>
+      <button type="button" onClick={() => router.back()}>
+        Quit quiz
+      </button>
       <div>
         <h2>
           Question: {activeQuestion + 1}
