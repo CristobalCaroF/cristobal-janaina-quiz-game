@@ -33,6 +33,11 @@ export default function Home() {
           PLAY
         </button>
       </div>
+      <div>
+        <button type="button " onClick={() => router.push("/highscores")}>
+          HIGHSCORES
+        </button>
+      </div>
     </>
   );
 }
