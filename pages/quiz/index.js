@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
@@ -19,6 +20,7 @@ export default function Quiz() {
     score: 0,
   });
   const router = useRouter();
+  const { data: session } = useSession();
 
   const { data, error, isLoading, mutate } = useSWR("/api/questions", fetcher);
   const [questions, setQuestions] = useState([]);
@@ -48,6 +50,25 @@ export default function Quiz() {
     }
   };
 
+  async function addScore(result) {
+    console.log("stored result");
+    const today = new Date();
+    const finalDate = today.toISOString().split("T")[0];
+    const response = await fetch("/api/scores", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: session.user.name,
+        score: result.score,
+        date: finalDate,
+      }),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+  }
+
   const nextQuestion = () => {
     setResult((prev) =>
       selectedAnswer
@@ -63,6 +84,7 @@ export default function Quiz() {
     } else {
       setActiveQuestion(0);
       setShowResult(true);
+      addScore(result);
     }
     setChecked(false);
   };
