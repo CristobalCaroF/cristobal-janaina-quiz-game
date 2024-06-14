@@ -3,12 +3,20 @@ import ProfileInfo from "@/components/ProfileInfo";
 import SignIn from "@/components/SignIn";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Router from "next/router";
 
 export default function Home() {
   const { data: session } = useSession();
 
   if (!session) {
     return <SignIn />;
+  }
+
+  function handleClickPlay() {
+    const { pathname } = Router;
+    if (pathname == "/") {
+      Router.push("/quiz");
+    }
   }
 
   return (
@@ -27,7 +35,9 @@ export default function Home() {
       </div>
 
       <div>
-        <button type="button ">PLAY</button>
+        <button type="button " onClick={handleClickPlay}>
+          PLAY
+        </button>
       </div>
     </>
   );
