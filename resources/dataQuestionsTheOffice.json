@@ -1,0 +1,93 @@
+[
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What is the name of the company where the characters work?",
+    "answers": [
+      "Dunder Mifflin",
+      "Paper Company Inc.",
+      "Scranton Business Co.",
+      "Paper World"
+    ],
+    "correct": "Dunder Mifflin"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "Who is the regional manager of the Scranton branch?",
+    "answers": [
+      "Michael Scott",
+      "Dwight Schrute",
+      "Jim Halpert",
+      "Ryan Howard"
+    ],
+    "correct": "Michael Scott"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "Which character is known for their love of beets and bears?",
+    "answers": ["Dwight Schrute", "Jim Halpert", "Pam Beesly", "Andy Bernard"],
+    "correct": "Dwight Schrute"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "Who is known for their alter ego 'Prison Mike'?",
+    "answers": [
+      "Michael Scott",
+      "Ryan Howard",
+      "Kevin Malone",
+      "Creed Bratton"
+    ],
+    "correct": "Michael Scott"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "Which character has a Dundie Award for 'Whitest Sneakers'?",
+    "answers": ["Ryan Howard", "Pam Beesly", "Angela Martin", "Jim Halpert"],
+    "correct": "Pam Beesly"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What does Jim put in Jello as a prank on Dwight?",
+    "answers": ["Stapler", "Keyboard", "Mouse", "Desk"],
+    "correct": "Stapler"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What is the name of Michael Scott's former boss?",
+    "answers": ["Ed Truck", "David Wallace", "Jan Levinson", "Charles Miner"],
+    "correct": "Ed Truck"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What is the name of the documentary crew filming the office?",
+    "answers": [
+      "Documentary Crew",
+      "Scranton Crew",
+      "Office Lens",
+      "Dunder Mifflin Docs"
+    ],
+    "correct": "Documentary Crew"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What is the name of Angela's cat that Dwight puts in the freezer?",
+    "answers": ["Sprinkles", "Fluffy", "Whiskers", "Mittens"],
+    "correct": "Sprinkles"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "Which character starts their own paper company?",
+    "answers": ["Michael Scott", "Jim Halpert", "Pam Beesly", "Dwight Schrute"],
+    "correct": "Jim Halpert"
+  },
+  {
+    "quizId": "667084b04cea098ea6038b78",
+    "question": "What is the name of the Scranton Strangler?",
+    "answers": [
+      "Toby Flenderson",
+      "Kevin Malone",
+      "Stanley Hudson",
+      "Meredith Palmer"
+    ],
+    "correct": "Toby Flenderson"
+  }
+]
