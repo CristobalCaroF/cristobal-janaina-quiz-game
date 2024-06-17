@@ -3,10 +3,14 @@ import Image from "next/image";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import DarkModeToggle from "@/components/DarkModeToggle";
-
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
+const Table = styled.table`
+  display: flex;
+  justify-content: center;
+`;
 
 async function uploadFile(urlPath, { arg }) {
   await fetch(urlPath.join(""), {
@@ -35,7 +39,7 @@ export default function ProfilePage() {
     ["/api/profile/", session?.user?.name, "/score"],
     fetcher
   );
-  console.log(scores);
+  // console.log(scores);
 
   if (!session) {
     return;
@@ -84,7 +88,7 @@ export default function ProfilePage() {
 
       <h2>History:</h2>
 
-      <table>
+      <Table>
         {scores?.map((score) => {
           return (
             <tr>
@@ -93,7 +97,7 @@ export default function ProfilePage() {
             </tr>
           );
         })}
-      </table>
+      </Table>
 
       <DarkModeToggle />
     </>
