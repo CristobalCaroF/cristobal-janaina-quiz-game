@@ -15,7 +15,10 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
     padding: 2rem;
-    background-color: rgb(151, 108, 192);
+    background-color: rgba(87, 39, 232, 0.656);
+    display:flex;
+    justify-content: center;
+    text-align: center;
   
   }
 
