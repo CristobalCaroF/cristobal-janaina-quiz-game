@@ -33,9 +33,16 @@ export default function Quiz() {
         let idx = Math.floor(Math.random() * data.length);
         selectedQuestions.push(data[idx]);
         data.splice(idx, 1);
-        console.log(data.length);
       }
-
+      for (let question of selectedQuestions) {
+        for (let i = question.answers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [question.answers[i], question.answers[j]] = [
+            question.answers[j],
+            question.answers[i],
+          ];
+        }
+      }
       setQuestions(selectedQuestions);
     }
   }, [data]);
@@ -52,7 +59,6 @@ export default function Quiz() {
   };
 
   async function addScore(result) {
-    console.log("stored result");
     const today = new Date();
     const finalDate = today.toISOString().split("T")[0];
     const response = await fetch("/api/scores", {
