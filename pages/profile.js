@@ -39,7 +39,7 @@ export default function ProfilePage() {
     ["/api/profile/", session?.user?.name, "/score"],
     fetcher
   );
-  // console.log(scores);
+  console.log("scores", scores);
 
   if (!session) {
     return;
