@@ -1,4 +1,3 @@
-import { useState } from "react";
 import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
