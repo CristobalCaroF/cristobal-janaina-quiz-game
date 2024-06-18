@@ -1,30 +1,36 @@
 [
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Ross and Carol's son?",
     "answers": ["Ben", "Jack", "Charlie", "Max"],
     "correct": "Ben"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What was the name of Ross's first wife?",
     "answers": ["Susan", "Emily", "Rachel", "Carol"],
     "correct": "Carol"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Chandler's middle name?",
     "answers": ["Muriel", "Michael", "Matthew", "Marcel"],
     "correct": "Muriel"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Phoebe's twin sister?",
     "answers": ["Ursula", "Monica", "Janice", "Rachel"],
     "correct": "Ursula"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What does Joey never share?",
     "answers": ["Food", "Money", "Clothes", "Secrets"],
     "correct": "Food"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What was the name of Rachel's hairless cat?",
     "answers": [
       "Mr. Whiskerson",
@@ -35,21 +41,25 @@
     "correct": "Mr. Whiskerson"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What was the name of Ross and Monica's dog when they were kids?",
     "answers": ["Chi-Chi", "LaPooh", "Marcel", "Clunkers"],
     "correct": "Chi-Chi"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Joey's stuffed penguin?",
     "answers": ["Hugsy", "Waddle", "Fluffy", "Snowball"],
     "correct": "Hugsy"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What fruit is Ross allergic to?",
     "answers": ["Kiwi", "Apple", "Banana", "Strawberry"],
     "correct": "Kiwi"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Joey's character on Days of Our Lives?",
     "answers": [
       "Dr. Drake Ramoray",
@@ -59,82 +69,27 @@
     ],
     "correct": "Dr. Drake Ramoray"
   },
+
   {
-    "question": "What is the name of Ross and Carol's son?",
-    "answers": ["Ben", "Jack", "Charlie", "Max"],
-    "correct": "Ben"
-  },
-  {
-    "question": "What was the name of Ross's first wife?",
-    "answers": ["Susan", "Emily", "Rachel", "Carol"],
-    "correct": "Carol"
-  },
-  {
-    "question": "What is Chandler's middle name?",
-    "answers": ["Muriel", "Michael", "Matthew", "Marcel"],
-    "correct": "Muriel"
-  },
-  {
-    "question": "What is the name of Phoebe's twin sister?",
-    "answers": ["Ursula", "Monica", "Janice", "Rachel"],
-    "correct": "Ursula"
-  },
-  {
-    "question": "What does Joey never share?",
-    "answers": ["Food", "Money", "Clothes", "Secrets"],
-    "correct": "Food"
-  },
-  {
-    "question": "What was the name of Rachel's hairless cat?",
-    "answers": [
-      "Mr. Whiskerson",
-      "Mrs. Fluffy",
-      "Mr. Bigglesworth",
-      "Smelly Cat"
-    ],
-    "correct": "Mr. Whiskerson"
-  },
-  {
-    "question": "What was the name of Ross and Monica's dog when they were kids?",
-    "answers": ["Chi-Chi", "LaPooh", "Marcel", "Clunkers"],
-    "correct": "Chi-Chi"
-  },
-  {
-    "question": "What is the name of Joey's stuffed penguin?",
-    "answers": ["Hugsy", "Waddle", "Fluffy", "Snowball"],
-    "correct": "Hugsy"
-  },
-  {
-    "question": "What fruit is Ross allergic to?",
-    "answers": ["Kiwi", "Apple", "Banana", "Strawberry"],
-    "correct": "Kiwi"
-  },
-  {
-    "question": "What is the name of Joey's character on Days of Our Lives?",
-    "answers": [
-      "Dr. Drake Ramoray",
-      "Dr. Michael Mitchell",
-      "Dr. Ross Geller",
-      "Dr. Richard Burke"
-    ],
-    "correct": "Dr. Drake Ramoray"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who was Monica's first kiss?",
     "answers": ["Ross", "Chandler", "Joey", "Richard"],
     "correct": "Ross"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What kind of uniform does Joey wear to Monica and Chandler's wedding?",
     "answers": ["Soldier", "Chef", "Cowboy", "Superman"],
     "correct": "Soldier"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What was the name of Ross's monkey?",
     "answers": ["Marcel", "Maurice", "Mike", "Melvin"],
     "correct": "Marcel"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What song makes Ross and Rachel's daughter Emma laugh for the first time?",
     "answers": [
       "Baby Got Back",
@@ -145,11 +100,13 @@
     "correct": "Baby Got Back"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which of Joey's sisters did Chandler kiss?",
     "answers": ["Mary Angela", "Mary Therese", "Dina", "Gina"],
     "correct": "Mary Angela"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Rachel's favorite movie?",
     "answers": [
       "Weekend at Bernie's",
@@ -160,6 +117,7 @@
     "correct": "Weekend at Bernie's"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Chandler's father's Las Vegas all-male burlesque?",
     "answers": [
       "Viva Las Gaygas",
@@ -170,6 +128,7 @@
     "correct": "Viva Las Gaygas"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Joey's agent?",
     "answers": [
       "Estelle Leonard",
@@ -180,16 +139,19 @@
     "correct": "Estelle Leonard"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which friend gets stuck in an ATM vestibule with a supermodel?",
     "answers": ["Chandler", "Ross", "Joey", "Monica"],
     "correct": "Chandler"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Ross's second wife?",
     "answers": ["Emily", "Carol", "Rachel", "Susan"],
     "correct": "Emily"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What was the name of the diner where Monica worked as a waitress?",
     "answers": [
       "Moon Dance Diner",
@@ -199,27 +161,22 @@
     ],
     "correct": "Moon Dance Diner"
   },
+
   {
-    "question": "What fruit does Ross say he has a strange allergic reaction to?",
-    "answers": ["Kiwi", "Apple", "Banana", "Strawberry"],
-    "correct": "Kiwi"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What does Rachel guess Chandler's job is?",
     "answers": ["Transponster", "Accountant", "Lawyer", "Actor"],
     "correct": "Transponster"
   },
+
   {
-    "question": "What was the name of Ross's pet monkey?",
-    "answers": ["Marcel", "Mojo", "Milo", "Melvin"],
-    "correct": "Marcel"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who officiates Monica and Chandler's wedding?",
     "answers": ["Joey", "Ross", "Chandler's dad", "Phoebe"],
     "correct": "Joey"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What fake name does Phoebe use?",
     "answers": [
       "Regina Phalange",
@@ -230,11 +187,13 @@
     "correct": "Regina Phalange"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Joey's boat?",
     "answers": ["Mr. Beaumont", "Little Dinghy", "The Chandler", "Duck Boat"],
     "correct": "Mr. Beaumont"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which famous person does Ross claim to have 'came onto' while visiting Disneyland?",
     "answers": [
       "Isabella Rossellini",
@@ -245,16 +204,19 @@
     "correct": "Isabella Rossellini"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What does Phoebe find in her soda can?",
     "answers": ["A thumb", "A mouse", "A ring", "A toe"],
     "correct": "A thumb"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What store does Phoebe hate?",
     "answers": ["Pottery Barn", "IKEA", "Macy's", "Gap"],
     "correct": "Pottery Barn"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who is Chandler's TV magazine always addressed to?",
     "answers": [
       "Miss Chanandler Bong",
@@ -265,6 +227,7 @@
     "correct": "Miss Chanandler Bong"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What song makes Ross and Rachel's daughter Emma laugh for the first time?",
     "answers": [
       "Baby Got Back",
@@ -275,6 +238,7 @@
     "correct": "Baby Got Back"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Joey's soap opera character?",
     "answers": [
       "Dr. Drake Ramoray",
@@ -285,21 +249,25 @@
     "correct": "Dr. Drake Ramoray"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who is the last friend to find out about Monica and Chandler's relationship?",
     "answers": ["Ross", "Phoebe", "Joey", "Rachel"],
     "correct": "Ross"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which friend was famously overweight as a teenager?",
     "answers": ["Monica", "Chandler", "Rachel", "Ross"],
     "correct": "Monica"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which character famously said 'We were on a break'?",
     "answers": ["Ross", "Rachel", "Joey", "Chandler"],
     "correct": "Ross"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Janice's catchphrase?",
     "answers": [
       "Oh. My. God.",
@@ -310,116 +278,83 @@
     "correct": "Oh. My. God."
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who got stuck in a pair of leather pants?",
     "answers": ["Ross", "Chandler", "Joey", "Rachel"],
     "correct": "Ross"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who teaches Rachel and Ross's daughter to prank call people?",
     "answers": ["Joey", "Monica", "Chandler", "Phoebe"],
     "correct": "Joey"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which character pretends to be a human encyclopedia?",
     "answers": ["Chandler", "Ross", "Rachel", "Joey"],
     "correct": "Joey"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which character is known for their love of food?",
     "answers": ["Joey", "Monica", "Chandler", "Phoebe"],
     "correct": "Joey"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who was married to a woman named Emily?",
     "answers": ["Ross", "Chandler", "Joey", "Monica"],
     "correct": "Ross"
   },
+
   {
-    "question": "What is the name of Joey's stuffed penguin?",
-    "answers": ["Hugsy", "Waddle", "Fluffy", "Snowball"],
-    "correct": "Hugsy"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which character famously said 'Pivot!'?",
     "answers": ["Ross", "Chandler", "Joey", "Rachel"],
     "correct": "Ross"
   },
+
   {
-    "question": "Who was Monica's first kiss ever?",
-    "answers": ["Ross", "Chandler", "Joey", "Richard"],
-    "correct": "Ross"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of the coffee shop where the friends frequently hang out?",
     "answers": ["Central Perk", "Central Park", "Central Cafe", "Central Bean"],
     "correct": "Central Perk"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What does Chandler's mom do for a living?",
     "answers": ["Erotic novelist", "Lawyer", "Chef", "Teacher"],
     "correct": "Erotic novelist"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which friend lived on the streets as a teenager?",
     "answers": ["Phoebe", "Monica", "Rachel", "Joey"],
     "correct": "Phoebe"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What kind of car does Ross drive?",
     "answers": ["Porsche", "Ferrari", "BMW", "Mercedes"],
     "correct": "Porsche"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is the name of Rachel's sister who she babysits?",
     "answers": ["Amy", "Jill", "Nina", "Emily"],
     "correct": "Amy"
   },
+
   {
-    "question": "What is the name of Joey's character on Days of Our Lives?",
-    "answers": [
-      "Dr. Drake Ramoray",
-      "Dr. Michael Mitchell",
-      "Dr. Ross Geller",
-      "Dr. Richard Burke"
-    ],
-    "correct": "Dr. Drake Ramoray"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who officiates Phoebe and Mike's wedding?",
     "answers": ["Joey", "Ross", "Chandler", "Rachel"],
     "correct": "Joey"
   },
+
   {
-    "question": "What is the name of Joey's agent?",
-    "answers": [
-      "Estelle Leonard",
-      "Janine Lacroix",
-      "Nina Bookbinder",
-      "Eddie Menuek"
-    ],
-    "correct": "Estelle Leonard"
-  },
-  {
-    "question": "What was the name of Ross and Monica's dog when they were kids?",
-    "answers": ["Chi-Chi", "LaPooh", "Marcel", "Clunkers"],
-    "correct": "Chi-Chi"
-  },
-  {
-    "question": "What is the name of Phoebe's twin sister?",
-    "answers": ["Ursula", "Monica", "Janice", "Rachel"],
-    "correct": "Ursula"
-  },
-  {
-    "question": "Which friend gets stuck in an ATM vestibule with a supermodel?",
-    "answers": ["Chandler", "Ross", "Joey", "Monica"],
-    "correct": "Chandler"
-  },
-  {
-    "question": "What is the name of Ross's second wife?",
-    "answers": ["Emily", "Carol", "Rachel", "Susan"],
-    "correct": "Emily"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Chandler Bing's job?",
     "answers": [
       "Statistical analysis and data reconfiguration",
@@ -430,6 +365,7 @@
     "correct": "Statistical analysis and data reconfiguration"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who plays the character of Joey Tribbiani?",
     "answers": [
       "Matt LeBlanc",
@@ -440,6 +376,7 @@
     "correct": "Matt LeBlanc"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Who plays the character of Ross Geller?",
     "answers": [
       "David Schwimmer",
@@ -450,6 +387,7 @@
     "correct": "David Schwimmer"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Joey's catchphrase?",
     "answers": [
       "How you doin'?",
@@ -460,46 +398,14 @@
     "correct": "How you doin'?"
   },
   {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "Which character famously said 'Oh. My. God.'?",
     "answers": ["Janice", "Joey", "Ross", "Rachel"],
     "correct": "Janice"
   },
+
   {
-    "question": "What is the name of Rachel's sister who she babysits?",
-    "answers": ["Amy", "Jill", "Nina", "Emily"],
-    "correct": "Amy"
-  },
-  {
-    "question": "What is the name of the cafe where the friends frequently hang out?",
-    "answers": ["Central Perk", "Central Park", "Central Cafe", "Central Bean"],
-    "correct": "Central Perk"
-  },
-  {
-    "question": "Who gets stuck in a pair of leather pants?",
-    "answers": ["Ross", "Chandler", "Joey", "Rachel"],
-    "correct": "Ross"
-  },
-  {
-    "question": "What is the name of Joey's character on Days of Our Lives?",
-    "answers": [
-      "Dr. Drake Ramoray",
-      "Dr. Michael Mitchell",
-      "Dr. Ross Geller",
-      "Dr. Richard Burke"
-    ],
-    "correct": "Dr. Drake Ramoray"
-  },
-  {
-    "question": "Which character pretends to be a human encyclopedia?",
-    "answers": ["Chandler", "Ross", "Rachel", "Joey"],
-    "correct": "Joey"
-  },
-  {
-    "question": "Which friend was famously overweight as a teenager?",
-    "answers": ["Monica", "Chandler", "Rachel", "Ross"],
-    "correct": "Monica"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What is Janice's catchphrase?",
     "answers": [
       "Oh. My. God.",
@@ -509,27 +415,9 @@
     ],
     "correct": "Oh. My. God."
   },
+
   {
-    "question": "What store does Phoebe hate?",
-    "answers": ["Pottery Barn", "IKEA", "Macy's", "Gap"],
-    "correct": "Pottery Barn"
-  },
-  {
-    "question": "Which famous person does Ross claim to have 'came onto' while visiting Disneyland?",
-    "answers": [
-      "Isabella Rossellini",
-      "Cindy Crawford",
-      "Winona Ryder",
-      "Christina Applegate"
-    ],
-    "correct": "Isabella Rossellini"
-  },
-  {
-    "question": "What is the name of Joey's boat?",
-    "answers": ["Mr. Beaumont", "Little Dinghy", "The Chandler", "Duck Boat"],
-    "correct": "Mr. Beaumont"
-  },
-  {
+    "quizId": "667084b04cea098ea6038b77",
     "question": "What fake name does Phoebe use?",
     "answers": [
       "Regina Phalange",
@@ -538,35 +426,5 @@
       "Emily Waltham"
     ],
     "correct": "Regina Phalange"
-  },
-  {
-    "question": "What is the name of the coffee shop where the friends frequently hang out?",
-    "answers": ["Central Perk", "Central Park", "Central Cafe", "Central Bean"],
-    "correct": "Central Perk"
-  },
-  {
-    "question": "Who is Chandler's TV magazine always addressed to?",
-    "answers": [
-      "Miss Chanandler Bong",
-      "Mr. Chandler Bing",
-      "Mrs. Chanandler Bong",
-      "Miss Chanandler Bong"
-    ],
-    "correct": "Miss Chanandler Bong"
-  },
-  {
-    "question": "What was the name of Ross and Monica's dog when they were kids?",
-    "answers": ["Chi-Chi", "LaPooh", "Marcel", "Clunkers"],
-    "correct": "Chi-Chi"
-  },
-  {
-    "question": "Who officiates Monica and Chandler's wedding?",
-    "answers": ["Joey", "Ross", "Chandler's dad", "Phoebe"],
-    "correct": "Joey"
-  },
-  {
-    "question": "Which friend lived on the streets as a teenager?",
-    "answers": ["Phoebe", "Monica", "Rachel", "Joey"],
-    "correct": "Phoebe"
   }
 ]
