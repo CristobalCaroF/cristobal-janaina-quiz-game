@@ -65,9 +65,11 @@ export default function Quiz() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: session.user.name,
+        userId: session.user.name,
         score: result.score,
         date: finalDate,
+
+        // quizId:
       }),
     });
 

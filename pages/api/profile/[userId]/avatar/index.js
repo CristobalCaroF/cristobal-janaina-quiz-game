@@ -4,7 +4,7 @@ import User from "@/db/models/User";
 export default async function handler(req, res) {
   if (["GET", "POST"].includes(req.method)) {
     await dbConnect();
-    const user = await User.findOne({ username: req.query.username }).exec();
+    const user = await User.findOne({ userId: req.query.userId }).exec();
     if (user) {
       switch (req.method) {
         case "POST":
