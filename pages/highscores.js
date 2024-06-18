@@ -1,5 +1,11 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+
+const Table = styled.table`
+  display: flex;
+  justify-content: center;
+`;
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
@@ -16,16 +22,22 @@ export default function HighScores() {
         Home
       </button>
       <h2>High Scores:</h2>
-      <p> User name | Score | Date</p>
-      <ul>
-        {data.map((score) => {
-          return (
-            <li key={score._id}>
-              {score.username} | {score.score} | {score.date}
-            </li>
-          );
-        })}
-      </ul>
+      <Table>
+        <tr>
+          <td>Date</td>
+          <td>User</td>
+          <td>Score</td>
+          {data?.map((score) => {
+            return (
+              <tr>
+                <td>{score.date}</td>
+                <td>{score.userId}</td>
+                <td>{score.score}</td>
+              </tr>
+            );
+          })}
+        </tr>
+      </Table>
     </div>
   );
 }
