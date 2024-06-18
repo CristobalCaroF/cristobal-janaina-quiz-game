@@ -1,11 +1,14 @@
 // import styled from "styled-components";
 
-import useSWR from "swr";
-import { useEffect, useState } from "react";
-import Link from "next/link.js";
-import useRandomQuestions from "@/utils/useRandomQuestions";
-import { useRouter } from "next/router";
+import Answers from "@/components/Answers";
+import { Box, Container, Paper, Slide, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { useImmer } from "use-immer";
+
+const NUM_QUESTIONS = 10;
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
@@ -24,12 +27,14 @@ export default function Quiz() {
 
   const { data, error, isLoading, mutate } = useSWR("/api/questions", fetcher);
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useImmer(Array(NUM_QUESTIONS));
+  const [slideDirection, setSlideDirection] = useState("left");
 
   useEffect(() => {
     const selectedQuestions = [];
 
     if (data) {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < NUM_QUESTIONS; i++) {
         let idx = Math.floor(Math.random() * data.length);
         selectedQuestions.push(data[idx]);
         data.splice(idx, 1);
@@ -37,24 +42,26 @@ export default function Quiz() {
       for (let question of selectedQuestions) {
         for (let i = question.answers.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [question.answers[i], question.answers[j]] = [
-            question.answers[j],
-            question.answers[i],
-          ];
+          [question.answers[i], question.answers[j]] = [question.answers[j], question.answers[i]];
         }
       }
       setQuestions(selectedQuestions);
+      setAnswers((draft) => {
+        draft.fill("", 0, 10);
+      });
     }
   }, [data]);
 
   if (isLoading || error || !questions.length) return null;
 
-  const onAnswerSelected = (answer, idx) => {
-    setChecked(true);
-    if (answer === questions[activeQuestion].correct) {
-      setSelectedAnswer(true);
-    } else {
-      setSelectedAnswer(false);
+  const handleSelectAnswer = (questionIndex, answer) => {
+    if (answers[questionIndex].length === 0) {
+      setAnswers((draft) => {
+        draft[questionIndex] = answer;
+      });
+      setTimeout(() => {
+        setActiveQuestion((prev) => prev + 1);
+      }, 500);
     }
   };
 
@@ -96,12 +103,21 @@ export default function Quiz() {
     setChecked(false);
   };
 
+  const handleChangePage = (_e, page) => {
+    setSlideDirection(page - 1 > activeQuestion ? "left" : "right");
+    setActiveQuestion(page - 1);
+  };
+
   return (
-    <div>
+    // <Container maxWidth="xl" sx={{ backgroundColor: "#B798FF" }}>
+    <Container maxWidth="xl" disableGutters>
       <h1>Friends Quiz</h1>
       <button type="button" onClick={() => router.back()}>
         Quit quiz
       </button>
+      <Paper>
+        <Typography variant="h3">{questions[activeQuestion].question}</Typography>
+      </Paper>
       <div>
         <h2>
           Question: {activeQuestion + 1}
@@ -113,21 +129,43 @@ export default function Quiz() {
         {!showResult ? (
           <div>
             <h3>{questions[activeQuestion].question}</h3>
-            {questions[activeQuestion].answers.map((answer, idx) => (
-              <li key={idx} onClick={() => onAnswerSelected(answer, idx)}>
-                <span>{answer}</span>
-              </li>
-            ))}
-            {checked ? (
-              <button onClick={nextQuestion}>
-                {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
-            ) : (
-              <button disabled>
-                {" "}
-                {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
-            )}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                alignContent: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {questions.map((question, index) => (
+                  <Box
+                    key={index}
+                    sx={{ width: "100%", height: "100%", display: activeQuestion === index ? "block" : "none" }}
+                  >
+                    <Slide in={activeQuestion === index} direction={slideDirection}>
+                      <Box>
+                        <Answers
+                          values={question.answers}
+                          selectedAnswer={answers[index]}
+                          correctAnswer={question.correct}
+                          onSelect={(answer) => handleSelectAnswer(index, answer)}
+                        />
+                      </Box>
+                    </Slide>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
           </div>
         ) : (
           // <Results result={result} />
@@ -139,6 +177,6 @@ export default function Quiz() {
           </div>
         )}
       </div>
-    </div>
+    </Container>
   );
 }

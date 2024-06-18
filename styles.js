@@ -15,7 +15,14 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
     padding: 2rem;
-    background-color: rgba(87, 39, 232, 0.656);
+    // background-color: rgba(87, 39, 232, 0.656);
+    background-image: linear-gradient(
+      rgba(132, 128, 128, 0.4),
+      rgba(88, 85, 85, 0.5)
+    ),
+     url("/friends/background.jpeg");
+       background-position: absolute;
+  background-size: auto;
     display:flex;
     justify-content: center;
     text-align: center;

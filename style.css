@@ -1,3 +1,4 @@
 body {
-  color: rgba(87, 39, 232, 0.656);
+  background-image: url("/friends/background.png");
+  /* color: rgba(87, 39, 232, 0.656); */
 }

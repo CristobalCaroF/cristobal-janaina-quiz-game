@@ -1,18 +1,15 @@
-import { useState } from "react";
-import GlobalStyle from "../styles.js";
-import { SWRConfig } from "swr";
+import friendsTheme from "@/themes/friendsTheme.js";
+import { ThemeProvider } from "@mui/material/styles";
 import { SessionProvider } from "next-auth/react";
-import { ThemeProvider } from "next-themes";
+import { SWRConfig } from "swr";
+import GlobalStyle from "../styles.js";
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <SWRConfig>
         <GlobalStyle />
-        <ThemeProvider>
+        <ThemeProvider theme={friendsTheme}>
           <Component {...pageProps} />
         </ThemeProvider>
       </SWRConfig>
