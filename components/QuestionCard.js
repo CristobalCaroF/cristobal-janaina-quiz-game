@@ -1,5 +1,4 @@
-import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 // import Link from "next/link.js";
 // import styled from "styled-components";
 // import { StyledImage } from "./StyledImage.js";
@@ -17,21 +16,16 @@ export default function Card({ question }) {
   }
 
   return (
-    <>
-      <article>
-        <h4>{question.question}</h4>
-        <ul>
-          {question.answers.map((answer, index) => {
-            return (
-              <li key={index}>
-                <input type="radio" value={answer} />
-                {answer}
-              </li>
-            );
-            // return <option>{answer}</option>;
-          })}
-        </ul>
-      </article>
-    </>
+    <article>
+      <h4>{question.question}</h4>
+      <Grid container>
+        {question.answers.map((answer, index) => (
+          <Grid item xs={12} sm={6}>
+            <input type="radio" value={answer} />
+            {answer}
+          </Grid>
+        ))}
+      </Grid>
+    </article>
   );
 }
