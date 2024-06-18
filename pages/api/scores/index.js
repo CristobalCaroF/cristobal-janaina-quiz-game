@@ -8,8 +8,10 @@ export default async function handler(request, response) {
     const scores = await Scores.find();
     return response.status(200).json(scores);
   } else if (request.method === "POST") {
-    console.log("REQBOY", request.body);
-    const scores = await Scores.create(request.body);
+    const scores = await Scores.create({
+      ...request.body,
+      quiz: request.body.quizId,
+    });
 
     return response.status(200).json(scores);
   } else {
