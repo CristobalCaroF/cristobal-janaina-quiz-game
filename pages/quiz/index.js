@@ -9,6 +9,15 @@ import { useSession } from "next-auth/react";
 
 const fetcher = (...args) => fetch(args).then((res) => res.json());
 
+// Friends:
+// const selectedQuizId = "667084b04cea098ea6038b77";
+// The Office:
+const selectedQuizId = "667084b04cea098ea6038b78";
+// The big bang theory:
+// const selectedQuizId = "667084b04cea098ea6038b79";
+// How I met Your mother:
+// const selectedQuizId = "667084b04cea098ea6038b7a";
+
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -29,11 +38,19 @@ export default function Quiz() {
     const selectedQuestions = [];
 
     if (data) {
+      // Filter of questions by quiz Id
+      const selectedQuizQuestions = data.filter((question) => {
+        return question.quizId === selectedQuizId;
+      });
+
+      // Selection of 10 random questions
       for (let i = 0; i < 10; i++) {
-        let idx = Math.floor(Math.random() * data.length);
-        selectedQuestions.push(data[idx]);
-        data.splice(idx, 1);
+        let idx = Math.floor(Math.random() * selectedQuizQuestions.length);
+        selectedQuestions.push(selectedQuizQuestions[idx]);
+        selectedQuizQuestions.splice(idx, 1);
       }
+
+      // Suffle answers order
       for (let question of selectedQuestions) {
         for (let i = question.answers.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -44,6 +61,7 @@ export default function Quiz() {
         }
       }
       setQuestions(selectedQuestions);
+      console.log("questions: ", selectedQuestions);
     }
   }, [data]);
 

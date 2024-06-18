@@ -6,6 +6,7 @@ const questionSchema = new Schema({
   question: { type: String, required: true },
   answers: { type: Array, required: true },
   correct: { type: String, required: true },
+  quizId: { type: String, required: true },
 });
 
 const Question =
