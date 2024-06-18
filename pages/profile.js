@@ -89,14 +89,17 @@ export default function ProfilePage() {
       <h2>History:</h2>
 
       <Table>
-        {scores?.map((score) => {
-          return (
-            <tr>
-              <td>{score.date}</td>
-              <td>{score.score}</td>
-            </tr>
-          );
-        })}
+        <tr>
+          {scores?.map((score) => {
+            return (
+              <>
+                <td>{score.date}</td>
+                <td>{score.score}</td>
+                <br />
+              </>
+            );
+          })}
+        </tr>
       </Table>
 
       <DarkModeToggle />
