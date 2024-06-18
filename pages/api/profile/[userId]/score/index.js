@@ -7,7 +7,7 @@ export default async function handler(request, response) {
     console.log("request.query.userId", request.query.userId);
     const scores = await Scores.find({
       userId: request.query.userId,
-    });
+    }).populate("quiz");
     console.log("SCORES", scores);
     return response.status(200).json(scores);
   }
