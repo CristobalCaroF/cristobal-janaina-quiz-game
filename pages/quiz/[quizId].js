@@ -7,7 +7,7 @@ import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-const fetcher = (...args) => fetch(args).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -20,9 +20,13 @@ export default function Quiz() {
     score: 0,
   });
   const router = useRouter();
+  const { quizId } = router.query;
   const { data: session } = useSession();
 
-  const { data, error, isLoading, mutate } = useSWR("/api/questions", fetcher);
+  const { data, error, isLoading, mutate } = useSWR(
+    `/api/questions/${quizId}`,
+    fetcher
+  );
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -68,8 +72,7 @@ export default function Quiz() {
         userId: session.user.name,
         score: result.score,
         date: finalDate,
-
-        // quizId:
+        quizId: quizId,
       }),
     });
 
