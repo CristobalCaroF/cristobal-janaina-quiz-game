@@ -39,7 +39,7 @@ export default function ProfilePage() {
     ["/api/profile/", session?.user?.name, "/score"],
     fetcher
   );
-  console.log("scores", scores);
+  console.log(scores);
 
   if (!session) {
     return;
@@ -89,14 +89,18 @@ export default function ProfilePage() {
       <h2>History:</h2>
 
       <Table>
-        {scores?.map((score) => {
-          return (
-            <tr>
-              <td>{score.date}</td>
-              <td>{score.score}</td>
-            </tr>
-          );
-        })}
+        <tr>
+          {scores?.map((score) => {
+            return (
+              <>
+                <td>{score.date}</td>
+                <td>{score.score}</td>
+                <td>{score.quiz.name}</td>
+                <br />
+              </>
+            );
+          })}
+        </tr>
       </Table>
 
       <DarkModeToggle />
