@@ -24,6 +24,8 @@ async function uploadFile(urlPath, { arg }) {
   });
 }
 
+const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
+
 export default function ProfilePage() {
   const { data: session } = useSession();
   const [avatarImage, setAvatarImage] = useState();
@@ -34,12 +36,10 @@ export default function ProfilePage() {
   );
   const router = useRouter();
 
-  const { data: scores } = useSWR([
-    "/api/profile/",
-    session?.user?.name,
-    "/score",
-  ]);
-  console.log(scores);
+  const { data: scores } = useSWR(
+    ["/api/profile/", session?.user?.name, "/score"],
+    fetcher
+  );
 
   if (!session) {
     return;
