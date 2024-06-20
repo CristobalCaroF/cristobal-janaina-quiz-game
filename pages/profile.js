@@ -23,7 +23,6 @@ async function uploadFile(urlPath, { arg }) {
     }),
   });
 }
-const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -35,10 +34,11 @@ export default function ProfilePage() {
   );
   const router = useRouter();
 
-  const { data: scores } = useSWR(
-    ["/api/profile/", session?.user?.name, "/score"],
-    fetcher
-  );
+  const { data: scores } = useSWR([
+    "/api/profile/",
+    session?.user?.name,
+    "/score",
+  ]);
   console.log(scores);
 
   if (!session) {
@@ -90,6 +90,10 @@ export default function ProfilePage() {
 
       <Table>
         <tr>
+          <td>Date</td>
+          <td>Score</td>
+          <td>Quiz</td>
+          <br />
           {scores?.map((score) => {
             return (
               <>
