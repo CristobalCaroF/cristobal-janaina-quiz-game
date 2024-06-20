@@ -16,6 +16,63 @@ const CardBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
+
+  h2 {
+    font-size: 15px;
+    display: flex;
+    alignt-items: start;
+    padding: 20px 0;
+    border-bottom: 2px solid #c40094;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  li {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    font-size: 17px;
+    text-decoration: none;
+    margin: 10px 0;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    span {
+      text-decoration: none;
+    }
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 32px;
+  text-align: center;
+  background: linear-gradient(45deg, transparent, #c40094, transparent);
+`;
+
+const Buttonnext = styled.button`
+  width: 100px;
+  height: 45px;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background: #950170;
+    border-color: #950170;
+  }
 `;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -114,35 +171,39 @@ export default function Quiz() {
 
   return (
     <div>
-      <h1>Friends Quiz</h1>
+      <Title>Friends Quiz</Title>
       <button type="button" onClick={() => router.back()}>
         Quit quiz
       </button>
-      <div>
-        <h2>
-          Question: {activeQuestion + 1}
-          <span>/{questions.length}</span>
-        </h2>
-      </div>
+
       <section>
         {/* <QuizCard title={questions[activeQuestion].question} /> */}
         {!showResult ? (
           <CardBox>
+            <div>
+              <h2>
+                Question: {activeQuestion + 1}
+                <span>/{questions.length}</span>
+              </h2>
+            </div>
+
             <h3>{questions[activeQuestion].question}</h3>
+
             {questions[activeQuestion].answers.map((answer, idx) => (
               <li key={idx} onClick={() => onAnswerSelected(answer, idx)}>
                 <span>{answer}</span>
               </li>
             ))}
+
             {checked ? (
-              <button onClick={nextQuestion}>
+              <Buttonnext onClick={nextQuestion}>
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
+              </Buttonnext>
             ) : (
-              <button disabled>
+              <Buttonnext disabled>
                 {" "}
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
+              </Buttonnext>
             )}
           </CardBox>
         ) : (

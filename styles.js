@@ -20,6 +20,7 @@ export default createGlobalStyle`
     display:flex;
     justify-content: center;
     text-align: center;
+    text-decoration: none;
     
   
   }
