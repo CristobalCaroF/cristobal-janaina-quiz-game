@@ -29,7 +29,8 @@ const CardBox = styled.div`
     font-size: 24px;
     font-weight: 600;
   }
-  li {
+
+  ul {
     width: 100%;
     padding: 12px;
     background: transparent;
@@ -39,14 +40,22 @@ const CardBox = styled.div`
     text-decoration: none;
     margin: 10px 0;
     cursor: pointer;
+  }
+`;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    span {
-      text-decoration: none;
-    }
+const Answers = styled.li`
+  background-color: ${(props) =>
+    props.isCorrect ? "rgb(96, 190, 96)" : "white"};
+  color: ${(props) => (props.isCorrect ? "white" : "black")};
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) =>
+      props.isCorrect ? "rgb(96, 190, 96)" : "rgba(255, 255, 255, 0.1)"};
+    border-color: rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -79,7 +88,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [checked, setChecked] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState({
@@ -121,7 +130,7 @@ export default function Quiz() {
 
   if (isLoading || error || !questions.length) return null;
 
-  const onAnswerSelected = (answer, idx) => {
+  const onAnswerSelected = (answer) => {
     setChecked(true);
     if (answer === questions[activeQuestion].correct) {
       setSelectedAnswer(true);
@@ -129,6 +138,18 @@ export default function Quiz() {
       setSelectedAnswer(false);
     }
   };
+
+  // const handleAnswer = (questionIndex, answer) => {
+  //   setAnswers((draft) => {
+  //     draft[questionIndex] = answer;
+  //   });
+  //   if (questionIndex + 1 < questions.length) {
+  //     setTimeout(() => {
+  //       setCurrentQuestionIndex(questionIndex + 1);
+  //     }, 800);
+  //   } else {
+  //   }
+  // };
 
   async function addScore(result) {
     const today = new Date();
@@ -190,9 +211,16 @@ export default function Quiz() {
             <h3>{questions[activeQuestion].question}</h3>
 
             {questions[activeQuestion].answers.map((answer, idx) => (
-              <li key={idx} onClick={() => onAnswerSelected(answer, idx)}>
-                <span>{answer}</span>
-              </li>
+              <Answers
+                key={idx}
+                onClick={() => onAnswerSelected(answer, idx)}
+                isCorrect={
+                  checked && answer === questions[activeQuestion].correct
+                }
+                style={{ listStyleType: "none" }}
+              >
+                <li style={{ listStyleType: "none" }}>{answer}</li>
+              </Answers>
             ))}
 
             {checked ? (
