@@ -13,14 +13,13 @@ export default createGlobalStyle`
     
     height: 100vh; /* Garante que o body cubra a altura total da viewport */
     width: 100vw;
-    
-      margin: 0;
-      font-family: system-ui;
-      padding: 2rem;
-      background-color: rgb(242, 140, 6);
-      display:flex;
-      justify-content: center;
-      text-align: center;
+    margin: 0;
+    font-family: system-ui;
+    padding: 2rem;
+    background-color: rgb(242, 140, 6);
+    display:flex;
+    justify-content: center;
+    text-align: center;
     
   
   }
