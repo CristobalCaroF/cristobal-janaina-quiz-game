@@ -10,15 +10,17 @@ export default createGlobalStyle`
  
 
   body {
+    
+    height: 100vh; /* Garante que o body cubra a altura total da viewport */
     width: 100vw;
-    height: 100vh;
     margin: 0;
     font-family: system-ui;
     padding: 2rem;
-    background-color: rgba(87, 39, 232, 0.656);
+    background-color: rgb(242, 140, 6);
     display:flex;
     justify-content: center;
     text-align: center;
+    
   
   }
 
