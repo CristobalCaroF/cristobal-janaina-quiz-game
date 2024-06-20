@@ -2,8 +2,8 @@ import dbConnect from "@/db/dbConnect";
 import User from "@/db/models/User";
 
 export default async function handler(req, res) {
+  await dbConnect();
   if (["GET", "POST"].includes(req.method)) {
-    await dbConnect();
     const user = await User.findOne({ userId: req.query.userId }).exec();
     if (user) {
       switch (req.method) {
