@@ -1,4 +1,4 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 
 import useSWR from "swr";
 import { useEffect, useState } from "react";
@@ -6,6 +6,17 @@ import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+
+const CardBox = styled.div`
+  position: relative;
+  widht: 500px;
+  background: transparent;
+  border: 2px solid #c40094;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+`;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -113,10 +124,10 @@ export default function Quiz() {
           <span>/{questions.length}</span>
         </h2>
       </div>
-      <div>
+      <section>
         {/* <QuizCard title={questions[activeQuestion].question} /> */}
         {!showResult ? (
-          <div>
+          <CardBox>
             <h3>{questions[activeQuestion].question}</h3>
             {questions[activeQuestion].answers.map((answer, idx) => (
               <li key={idx} onClick={() => onAnswerSelected(answer, idx)}>
@@ -133,7 +144,7 @@ export default function Quiz() {
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
               </button>
             )}
-          </div>
+          </CardBox>
         ) : (
           // <Results result={result} />
           <div>
@@ -143,7 +154,7 @@ export default function Quiz() {
             <h3>Wrong: {result.wrongAnswers}</h3>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }
