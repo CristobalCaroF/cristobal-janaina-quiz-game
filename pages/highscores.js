@@ -2,6 +2,10 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
+import Link from "next/link";
+import homeIcon from "/public/home-black.png";
+import HighScoresTable from "@/components/HighScoresTable";
 
 const Table = styled.table`
   display: flex;
@@ -42,9 +46,6 @@ export default function HighScores() {
   return (
     <div>
       <h1>High Scores</h1>
-      <button type="button" onClick={() => router.back()}>
-        Home
-      </button>
       <hr />
       <label>
         Select a quiz:
@@ -52,7 +53,6 @@ export default function HighScores() {
           onChange={(e) => {
             setSelectedQuizId(e.target.value);
             handleQuizName(e.target.value);
-            // setSelectedQuiz()
           }}
         >
           {quizData?.map((quiz) => (
@@ -62,25 +62,18 @@ export default function HighScores() {
       </label>
       <hr />
       <h3>{selectedQuiz}</h3>
-
-      <Table>
-        <tr>
-          <td>Date</td>
-          <td>User</td>
-          <td>Score</td>
-          <br />
-          {highScoresData?.map((score) => {
-            return (
-              <>
-                <td>{score.date}</td>
-                <td>{score.userId}</td>
-                <td>{score.score}</td>
-                <br />
-              </>
-            );
-          })}
-        </tr>
-      </Table>
+      <HighScoresTable scores={highScoresData} />
+      <div>
+        <Link href="/">
+          <Image
+            width={30}
+            height={30}
+            priority
+            src={homeIcon}
+            alt="home-page"
+          />
+        </Link>
+      </div>
     </div>
   );
 }
