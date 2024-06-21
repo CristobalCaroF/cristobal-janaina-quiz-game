@@ -210,7 +210,7 @@ export default function Quiz({ questions, quiz }) {
   }
 
   const score = () => {
-    return countCorrectAnswers() * 1000 - time * 10;
+    return Math.max(countCorrectAnswers() * 1000 - time * 10, 0);
   };
 
   const countCorrectAnswers = () => {
