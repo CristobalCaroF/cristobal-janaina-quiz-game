@@ -1,11 +1,11 @@
 import styled from "styled-components";
-
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Instructions from "@/components/Instructions";
 
 const CardBox = styled.div`
   position: relative;
@@ -35,7 +35,7 @@ const CardBox = styled.div`
     padding: 12px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
+
     font-size: 17px;
     text-decoration: none;
     margin: 10px 0;
@@ -48,6 +48,7 @@ const Answers = styled.li`
     props.isSelected ? (props.isCorrect ? "green" : "red") : "white"};
   color: "black";
   border: 1px solid #ccc;
+  border-radius: 15px;
   padding: 10px;
   margin: 5px;
   cursor: pointer;
@@ -66,25 +67,6 @@ const Title = styled.h1`
   background: linear-gradient(45deg, transparent, #c40094, transparent);
 `;
 
-const Buttonnext = styled.button`
-  width: 100px;
-  height: 45px;
-  background: transparent;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.3);
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.5s;
-
-  &:hover {
-    background: #950170;
-    border-color: #950170;
-  }
-`;
-
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
@@ -92,11 +74,14 @@ export default function Quiz() {
   // const [selectedAnswer, setSelectedAnswer] = useState(null);
   // const [checked, setChecked] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [result, setResult] = useState({
-    correctAnswers: 0,
-    wrongAnswers: 0,
-    score: 0,
-  });
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  // const [result, setResult] = useState({
+  //   correctAnswers: 0,
+  //   wrongAnswers: 0,
+  //   score: 0,
+  // });
   const router = useRouter();
   const { quizId } = router.query;
   const { data: session } = useSession();
@@ -105,8 +90,6 @@ export default function Quiz() {
     `/api/questions/${quizId}`,
     fetcher
   );
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     const selectedQuestions = [];
@@ -146,10 +129,9 @@ export default function Quiz() {
         setShowResult(true);
       }
     }, 800);
-
-    // setChecked(true);
-    // setSelectedAnswer(answer);
   };
+  // setChecked(true);
+  // setSelectedAnswer(answer);
   //   if (answer === questions[activeQuestion].correct) {
   //     setSelectedAnswer(true);
   //   } else {
@@ -202,20 +184,21 @@ export default function Quiz() {
       .filter((correctAnswer, idx) => answers[idx] === correctAnswer).length;
   };
 
+  const handleButtonPlay = () => {
+    setShowInstructions(false);
+  };
+
   return (
     <div>
-      <Title>Friends Quiz</Title>
-      <button type="button" onClick={() => router.back()}>
-        Quit quiz
-      </button>
-
       <section>
+        {showInstructions && <Instructions onClick={handleButtonPlay} />}
         {/* <QuizCard title={questions[activeQuestion].question} /> */}
-        {!showResult ? (
+        {!showInstructions && !showResult && (
           <CardBox>
+            <Title>Friends Quiz</Title>
             <div>
               <h2>
-                Question: {activeQuestion + 1}
+                {activeQuestion + 1}
                 <span>/{questions.length}</span>
               </h2>
             </div>
@@ -246,7 +229,8 @@ export default function Quiz() {
               </Buttonnext>
             )} */}
           </CardBox>
-        ) : (
+        )}
+        {showResult && (
           // <Results result={result} />
           <div>
             <h3>Results</h3>
@@ -256,6 +240,10 @@ export default function Quiz() {
           </div>
         )}
       </section>
+
+      <button type="button" onClick={() => router.back()}>
+        Quit quiz
+      </button>
     </div>
   );
 }
