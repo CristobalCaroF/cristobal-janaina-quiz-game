@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useId, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import useSWR from "swr";
@@ -39,12 +39,13 @@ export default function ProfilePage() {
   const { data: session } = useSession();
   const [avatarImage, setAvatarImage] = useState();
 
-  const { trigger } = useSWRMutation(
-    ["/api/profile/", session?.user?.userId, "/avatar"],
-    uploadFile
-  );
+  // const { trigger } = useSWRMutation(
+  //   ["/api/profile/", session?.user?.userId, "/avatar"],
+  //   uploadFile
+  // );
   const router = useRouter();
 
+  const [refreshKey, setRefreshKey] = useState(Date.now());
   const { data: scores } = useSWR(
     ["/api/profile/", session?.user?.userId, "/score"],
     fetcher
@@ -57,7 +58,7 @@ export default function ProfilePage() {
   async function handleChangeAvatar(event) {
     const file = event.target.files[0];
     setAvatarImage({
-      image: Buffer.from(await file.arrayBuffer()),
+      image: Buffer.from(await file.arrayBuffer()).toString("base64"),
       size: file.size,
       mimeType: file.type,
     });
@@ -70,9 +71,29 @@ export default function ProfilePage() {
     }
 
     const formElement = event.currentTarget;
-    trigger(avatarImage);
+    // trigger(avatarImage);
+
+    await fetch(`/api/profile/${session?.user?.userId}/avatar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(avatarImage),
+    });
+    setTimeout(() => {
+      setRefreshKey(Date.now());
+    }, 500);
     formElement.reset();
   }
+
+  const handleDelete = async () => {
+    await fetch(`/api/profile/${session?.user?.userId}/avatar`, {
+      method: "DELETE",
+    });
+    setTimeout(() => {
+      setRefreshKey(Date.now());
+    }, 500);
+  };
 
   return (
     <>
@@ -80,7 +101,11 @@ export default function ProfilePage() {
         <h1>Profile</h1>
       </div>
       <StyledImage
-        src={session.user?.image}
+        src={`/api/profile/${session.user?.userId}/avatar`}
+        loader={(params) =>
+          `${params.src}?github=${session.user?.image}&refreshKey=${refreshKey}`
+        }
+        key={refreshKey}
         alt="User Avatar"
         width={100}
         height={100}
@@ -88,6 +113,8 @@ export default function ProfilePage() {
       <PictureForm
         handleSubmit={handleSubmit}
         handleChangeAvatar={handleChangeAvatar}
+        showDelete={true}
+        onDelete={handleDelete}
       />
       <ScoresTable scores={scores} />
 

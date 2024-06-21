@@ -22,9 +22,17 @@ export const authOptions = {
       if (user === null) {
         user = await User.create({
           gitUsername: session.user.name,
+          gitImage: session.user.image,
         });
       }
-      return { ...session, user: { ...session.user, userId: user._id } };
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          userId: user._id,
+          // image: "/api/profile/6675a46502d08c6125404d23/avatar",
+        },
+      };
     },
   },
 
