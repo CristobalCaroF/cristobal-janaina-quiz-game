@@ -6,6 +6,9 @@ import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Instructions from "@/components/Instructions";
+import dbConnect from "@/db/dbConnect";
+import QuizModel from "@/db/models/Quiz";
+import Question from "@/db/models/Questions";
 
 const CardBox = styled.div`
   position: relative;
@@ -69,12 +72,46 @@ const Title = styled.h1`
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Quiz() {
+function shuffle(array) {
+  // Fisher Yates algorithm
+  let currentIndex = array.length,
+    randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+  return array;
+}
+
+export async function getServerSideProps(context) {
+  const { quizId } = context.query;
+
+  await dbConnect();
+  const quiz = await QuizModel.findOne({ _id: quizId });
+  const questions = await Question.aggregate([
+    { $match: { quizId: quizId } },
+  ]).sample(10);
+  return {
+    props: {
+      quiz: quiz.name,
+      questions: questions.map((question) => ({
+        question: question.question,
+        answers: shuffle(question.answers),
+        correct: question.correct,
+      })),
+    },
+  };
+}
+
+export default function Quiz({ questions, quiz }) {
   const [activeQuestion, setActiveQuestion] = useState(0);
 
   const [showResult, setShowResult] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
-  const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [time, setTime] = useState(0); // Estado para armazenar o tempo em segundos
   const [isRunning, setIsRunning] = useState(false);
@@ -99,43 +136,38 @@ export default function Quiz() {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
-  // const [result, setResult] = useState({
-  //   correctAnswers: 0,
-  //   wrongAnswers: 0,
-  //   score: 0,
-  // });
   const router = useRouter();
   const { quizId } = router.query;
   const { data: session } = useSession();
 
-  const { data, error, isLoading, mutate } = useSWR(
-    `/api/questions/${quizId}`,
-    fetcher
-  );
+  // const { data, error, isLoading, mutate } = useSWR(
+  //   `/api/questions/${quizId}`,
+  //   fetcher
+  // );
 
-  useEffect(() => {
-    const selectedQuestions = [];
+  // useEffect(() => {
+  //   const selectedQuestions = [];
 
-    if (data) {
-      for (let i = 0; i < 10; i++) {
-        let idx = Math.floor(Math.random() * data.length);
-        selectedQuestions.push(data[idx]);
-        data.splice(idx, 1);
-      }
-      for (let question of selectedQuestions) {
-        for (let i = question.answers.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [question.answers[i], question.answers[j]] = [
-            question.answers[j],
-            question.answers[i],
-          ];
-        }
-      }
-      setQuestions(selectedQuestions);
-    }
-  }, [data]);
+  //   if (data) {
+  //     for (let i = 0; i < 10; i++) {
+  //       let idx = Math.floor(Math.random() * data.length);
+  //       selectedQuestions.push(data[idx]);
+  //       data.splice(idx, 1);
+  //     }
+  //     for (let question of selectedQuestions) {
+  //       for (let i = question.answers.length - 1; i > 0; i--) {
+  //         const j = Math.floor(Math.random() * (i + 1));
+  //         [question.answers[i], question.answers[j]] = [
+  //           question.answers[j],
+  //           question.answers[i],
+  //         ];
+  //       }
+  //     }
+  //     setQuestions(selectedQuestions);
+  //   }
+  // }, [data]);
 
-  if (isLoading || error || !questions.length) return null;
+  // if (isLoading || error || !questions.length) return null;
 
   const onAnswerSelected = (answer) => {
     if (answers[activeQuestion] !== undefined) {
@@ -199,7 +231,7 @@ export default function Quiz() {
         {/* <QuizCard title={questions[activeQuestion].question} /> */}
         {!showInstructions && !showResult && (
           <CardBox>
-            <Title>Friends Quiz</Title>
+            <Title>{quiz} Quiz</Title>
             <div>
               <h2>
                 <span>
