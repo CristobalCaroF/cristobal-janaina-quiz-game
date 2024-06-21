@@ -45,18 +45,19 @@ const CardBox = styled.div`
 
 const Answers = styled.li`
   background-color: ${(props) =>
-    props.isCorrect ? "rgb(96, 190, 96)" : "white"};
-  color: ${(props) => (props.isCorrect ? "white" : "black")};
+    props.isSelected ? (props.isCorrect ? "green" : "red") : "white"};
+  color: "black";
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
   cursor: pointer;
-
+  ${(props) =>
+    !props.disabled
+      ? `
   &:hover {
-    background: ${(props) =>
-      props.isCorrect ? "rgb(96, 190, 96)" : "rgba(255, 255, 255, 0.1)"};
-    border-color: rgba(255, 255, 255, 0.1);
-  }
+    background-color: "green";
+    border-color: rgba(255, 255, 255, 0.1);`
+      : ``}
 `;
 
 const Title = styled.h1`
@@ -88,8 +89,8 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [checked, setChecked] = useState(false);
+  // const [selectedAnswer, setSelectedAnswer] = useState(null);
+  // const [checked, setChecked] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState({
     correctAnswers: 0,
@@ -105,6 +106,7 @@ export default function Quiz() {
     fetcher
   );
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     const selectedQuestions = [];
@@ -131,27 +133,31 @@ export default function Quiz() {
   if (isLoading || error || !questions.length) return null;
 
   const onAnswerSelected = (answer) => {
-    setChecked(true);
-    if (answer === questions[activeQuestion].correct) {
-      setSelectedAnswer(true);
-    } else {
-      setSelectedAnswer(false);
+    if (answers[activeQuestion] !== undefined) {
+      return;
     }
-  };
+    setAnswers([...answers, answer]);
 
-  // const handleAnswer = (questionIndex, answer) => {
-  //   setAnswers((draft) => {
-  //     draft[questionIndex] = answer;
-  //   });
-  //   if (questionIndex + 1 < questions.length) {
-  //     setTimeout(() => {
-  //       setCurrentQuestionIndex(questionIndex + 1);
-  //     }, 800);
+    setTimeout(() => {
+      if (activeQuestion + 1 < questions.length) {
+        setActiveQuestion(activeQuestion + 1);
+      } else {
+        addScore();
+        setShowResult(true);
+      }
+    }, 800);
+
+    // setChecked(true);
+    // setSelectedAnswer(answer);
+  };
+  //   if (answer === questions[activeQuestion].correct) {
+  //     setSelectedAnswer(true);
   //   } else {
+  //     setSelectedAnswer(false);
   //   }
   // };
 
-  async function addScore(result) {
+  async function addScore() {
     const today = new Date();
     const finalDate = today.toISOString().split("T")[0];
     const response = await fetch("/api/scores", {
@@ -159,35 +165,41 @@ export default function Quiz() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId: session.user.name,
-        score: result.score,
+        score: countCorrectAnswers(),
         date: finalDate,
         quizId: quizId,
       }),
     });
 
-    if (response.ok) {
-      mutate();
-    }
+    // if (response.ok) {
+    //   mutate();
+    // }
   }
 
-  const nextQuestion = () => {
-    setResult((prev) =>
-      selectedAnswer
-        ? {
-            ...prev,
-            score: prev.score + 1,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-    );
-    if (activeQuestion !== questions.length - 1) {
-      setActiveQuestion((prev) => prev + 1);
-    } else {
-      setActiveQuestion(0);
-      setShowResult(true);
-      addScore(result);
-    }
-    setChecked(false);
+  // const nextQuestion = () => {
+  //   setResult((prev) =>
+  //     selectedAnswer
+  //       ? {
+  //           ...prev,
+  //           score: prev.score + 1,
+  //           correctAnswers: prev.correctAnswers + 1,
+  //         }
+  //       : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+  //   );
+  //   if (activeQuestion !== questions.length - 1) {
+  //     setActiveQuestion((prev) => prev + 1);
+  //   } else {
+  //     setActiveQuestion(0);
+  //     setShowResult(true);
+  //     addScore(result);
+  //   }
+  //   // setChecked(false);
+  // };
+
+  const countCorrectAnswers = () => {
+    return questions
+      .map((question) => question.correct)
+      .filter((correctAnswer, idx) => answers[idx] === correctAnswer).length;
   };
 
   return (
@@ -214,16 +226,16 @@ export default function Quiz() {
               <Answers
                 key={idx}
                 onClick={() => onAnswerSelected(answer, idx)}
-                isCorrect={
-                  checked && answer === questions[activeQuestion].correct
-                }
+                isSelected={answers[activeQuestion] === answer}
+                // disabled={selectedAnswer !== null}
+                isCorrect={answer === questions[activeQuestion].correct}
                 style={{ listStyleType: "none" }}
               >
                 <li style={{ listStyleType: "none" }}>{answer}</li>
               </Answers>
             ))}
 
-            {checked ? (
+            {/* {checked ? (
               <Buttonnext onClick={nextQuestion}>
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
               </Buttonnext>
@@ -232,15 +244,15 @@ export default function Quiz() {
                 {" "}
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
               </Buttonnext>
-            )}
+            )} */}
           </CardBox>
         ) : (
           // <Results result={result} />
           <div>
             <h3>Results</h3>
-            <h3>Score: {result.score}</h3>
-            <h3>Correct: {result.correctAnswers}</h3>
-            <h3>Wrong: {result.wrongAnswers}</h3>
+            <h3>Score: {countCorrectAnswers() * 1000}</h3>
+            <h3>Correct: {countCorrectAnswers()}</h3>
+            <h3>Wrong: {questions.length - countCorrectAnswers()}</h3>
           </div>
         )}
       </section>
