@@ -1,11 +1,11 @@
 import styled from "styled-components";
-
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Link from "next/link.js";
 import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Instructions from "@/components/Instructions";
 
 const CardBox = styled.div`
   position: relative;
@@ -16,20 +16,72 @@ const CardBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
+
+  h2 {
+    font-size: 15px;
+    display: flex;
+    alignt-items: start;
+    padding: 20px 0;
+    border-bottom: 2px solid #c40094;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  ul {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 17px;
+    text-decoration: none;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+`;
+
+const Answers = styled.li`
+  background-color: ${(props) =>
+    props.isSelected ? (props.isCorrect ? "green" : "red") : "white"};
+  color: "black";
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  ${(props) =>
+    !props.disabled
+      ? `
+  &:hover {
+    background-color: "green";
+    border-color: rgba(255, 255, 255, 0.1);`
+      : ``}
+`;
+
+const Title = styled.h1`
+  font-size: 32px;
+  text-align: center;
+  background: linear-gradient(45deg, transparent, #c40094, transparent);
 `;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [checked, setChecked] = useState(false);
+  // const [selectedAnswer, setSelectedAnswer] = useState(null);
+  // const [checked, setChecked] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [result, setResult] = useState({
-    correctAnswers: 0,
-    wrongAnswers: 0,
-    score: 0,
-  });
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  // const [result, setResult] = useState({
+  //   correctAnswers: 0,
+  //   wrongAnswers: 0,
+  //   score: 0,
+  // });
   const router = useRouter();
   const { quizId } = router.query;
   const { data: session } = useSession();
@@ -38,7 +90,6 @@ export default function Quiz() {
     `/api/questions/${quizId}`,
     fetcher
   );
-  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     const selectedQuestions = [];
@@ -64,16 +115,31 @@ export default function Quiz() {
 
   if (isLoading || error || !questions.length) return null;
 
-  const onAnswerSelected = (answer, idx) => {
-    setChecked(true);
-    if (answer === questions[activeQuestion].correct) {
-      setSelectedAnswer(true);
-    } else {
-      setSelectedAnswer(false);
+  const onAnswerSelected = (answer) => {
+    if (answers[activeQuestion] !== undefined) {
+      return;
     }
-  };
+    setAnswers([...answers, answer]);
 
-  async function addScore(result) {
+    setTimeout(() => {
+      if (activeQuestion + 1 < questions.length) {
+        setActiveQuestion(activeQuestion + 1);
+      } else {
+        addScore();
+        setShowResult(true);
+      }
+    }, 800);
+  };
+  // setChecked(true);
+  // setSelectedAnswer(answer);
+  //   if (answer === questions[activeQuestion].correct) {
+  //     setSelectedAnswer(true);
+  //   } else {
+  //     setSelectedAnswer(false);
+  //   }
+  // };
+
+  async function addScore() {
     const today = new Date();
     const finalDate = today.toISOString().split("T")[0];
     const response = await fetch("/api/scores", {
@@ -81,80 +147,103 @@ export default function Quiz() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId: session.user.name,
-        score: result.score,
+        score: countCorrectAnswers(),
         date: finalDate,
         quizId: quizId,
       }),
     });
 
-    if (response.ok) {
-      mutate();
-    }
+    // if (response.ok) {
+    //   mutate();
+    // }
   }
 
-  const nextQuestion = () => {
-    setResult((prev) =>
-      selectedAnswer
-        ? {
-            ...prev,
-            score: prev.score + 1,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-    );
-    if (activeQuestion !== questions.length - 1) {
-      setActiveQuestion((prev) => prev + 1);
-    } else {
-      setActiveQuestion(0);
-      setShowResult(true);
-      addScore(result);
-    }
-    setChecked(false);
+  // const nextQuestion = () => {
+  //   setResult((prev) =>
+  //     selectedAnswer
+  //       ? {
+  //           ...prev,
+  //           score: prev.score + 1,
+  //           correctAnswers: prev.correctAnswers + 1,
+  //         }
+  //       : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+  //   );
+  //   if (activeQuestion !== questions.length - 1) {
+  //     setActiveQuestion((prev) => prev + 1);
+  //   } else {
+  //     setActiveQuestion(0);
+  //     setShowResult(true);
+  //     addScore(result);
+  //   }
+  //   // setChecked(false);
+  // };
+
+  const countCorrectAnswers = () => {
+    return questions
+      .map((question) => question.correct)
+      .filter((correctAnswer, idx) => answers[idx] === correctAnswer).length;
+  };
+
+  const handleButtonPlay = () => {
+    setShowInstructions(false);
   };
 
   return (
     <div>
-      <h1>Friends Quiz</h1>
-      <button type="button" onClick={() => router.back()}>
-        Quit quiz
-      </button>
-      <div>
-        <h2>
-          Question: {activeQuestion + 1}
-          <span>/{questions.length}</span>
-        </h2>
-      </div>
       <section>
+        {showInstructions && <Instructions onClick={handleButtonPlay} />}
         {/* <QuizCard title={questions[activeQuestion].question} /> */}
-        {!showResult ? (
+        {!showInstructions && !showResult && (
           <CardBox>
+            <Title>Friends Quiz</Title>
+            <div>
+              <h2>
+                {activeQuestion + 1}
+                <span>/{questions.length}</span>
+              </h2>
+            </div>
+
             <h3>{questions[activeQuestion].question}</h3>
+
             {questions[activeQuestion].answers.map((answer, idx) => (
-              <li key={idx} onClick={() => onAnswerSelected(answer, idx)}>
-                <span>{answer}</span>
-              </li>
+              <Answers
+                key={idx}
+                onClick={() => onAnswerSelected(answer, idx)}
+                isSelected={answers[activeQuestion] === answer}
+                // disabled={selectedAnswer !== null}
+                isCorrect={answer === questions[activeQuestion].correct}
+                style={{ listStyleType: "none" }}
+              >
+                <li style={{ listStyleType: "none" }}>{answer}</li>
+              </Answers>
             ))}
-            {checked ? (
-              <button onClick={nextQuestion}>
+
+            {/* {checked ? (
+              <Buttonnext onClick={nextQuestion}>
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
+              </Buttonnext>
             ) : (
-              <button disabled>
+              <Buttonnext disabled>
                 {" "}
                 {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
-            )}
+              </Buttonnext>
+            )} */}
           </CardBox>
-        ) : (
+        )}
+        {showResult && (
           // <Results result={result} />
           <div>
             <h3>Results</h3>
-            <h3>Score: {result.score}</h3>
-            <h3>Correct: {result.correctAnswers}</h3>
-            <h3>Wrong: {result.wrongAnswers}</h3>
+            <h3>Score: {countCorrectAnswers() * 1000}</h3>
+            <h3>Correct: {countCorrectAnswers()}</h3>
+            <h3>Wrong: {questions.length - countCorrectAnswers()}</h3>
           </div>
         )}
       </section>
+
+      <button type="button" onClick={() => router.back()}>
+        Quit quiz
+      </button>
     </div>
   );
 }
