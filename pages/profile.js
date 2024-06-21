@@ -40,13 +40,13 @@ export default function ProfilePage() {
   const [avatarImage, setAvatarImage] = useState();
 
   const { trigger } = useSWRMutation(
-    ["/api/profile/", session?.user?.name, "/avatar"],
+    ["/api/profile/", session?.user?.userId, "/avatar"],
     uploadFile
   );
   const router = useRouter();
 
   const { data: scores } = useSWR(
-    ["/api/profile/", session?.user?.name, "/score"],
+    ["/api/profile/", session?.user?.userId, "/score"],
     fetcher
   );
 

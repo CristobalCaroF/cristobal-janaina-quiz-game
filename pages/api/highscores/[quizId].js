@@ -6,12 +6,15 @@ export default async function handler(request, response) {
   const selectedQuizId = request.query.quizId;
 
   if (request.method === "GET") {
-    console.log("request.query.quizId", request.query.quizId);
-    const selectedQuizScores = Scores.find({ quiz: selectedQuizId });
-    const scores = await selectedQuizScores
-      .find()
+    let scores = await Scores.find({ quiz: selectedQuizId })
       .sort({ score: -1 })
-      .limit(10);
+      .limit(10)
+      .populate("user")
+      .lean();
+
+    scores = scores.map((score) => {
+      return { ...score, user: score.user.gitUsername };
+    });
 
     return response.status(200).json(scores);
   } else {

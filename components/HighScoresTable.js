@@ -51,7 +51,7 @@ export default function HighScoresTable({ scores }) {
             <TableRow key={index}>
               <TableCell>{score.date}</TableCell>
               <TableCell>{score.score}</TableCell>
-              <TableCell>{score.userId}</TableCell>
+              <TableCell>{score.user}</TableCell>
             </TableRow>
           ))}
         </tbody>

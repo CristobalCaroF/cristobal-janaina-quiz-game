@@ -5,7 +5,15 @@ export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
-    const scores = await Scores.find().sort({ score: -1 }).limit(10);
+    let scores = await Scores.find()
+      .sort({ score: -1 })
+      .limit(10)
+      .populate("user")
+      .lean();
+
+    scores = scores.map((score) => {
+      return { ...score, user: score.user.gitUsername };
+    });
 
     return response.status(200).json(scores);
   } else {
