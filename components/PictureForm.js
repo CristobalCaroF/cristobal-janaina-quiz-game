@@ -43,12 +43,27 @@ const Button = styled.button`
   }
 `;
 
-export default function PictureForm({ handleSubmit, handleChangeAvatar }) {
+export default function PictureForm({
+  handleSubmit,
+  handleChangeAvatar,
+  onDelete,
+  showDelete,
+}) {
+  const handleDelete = (e) => {
+    e.preventDefault();
+    onDelete();
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Label htmlFor="file">Change profile picture</Label>
       <Input type="file" name="file" onChange={handleChangeAvatar} />
       <Button type="submit">Upload</Button>
+      {showDelete && (
+        <Button type="button" onClick={handleDelete}>
+          Delete Image
+        </Button>
+      )}
     </Form>
   );
 }

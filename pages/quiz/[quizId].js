@@ -9,6 +9,7 @@ import Instructions from "@/components/Instructions";
 import dbConnect from "@/db/dbConnect";
 import QuizModel from "@/db/models/Quiz";
 import Question from "@/db/models/Questions";
+import mongoose from "mongoose";
 
 const CardBox = styled.div`
   position: relative;
@@ -197,7 +198,7 @@ export default function Quiz({ questions, quiz }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId: session.user.name,
+        userId: session.user.userId,
         score: score(),
         date: finalDate,
         quizId: quizId,
