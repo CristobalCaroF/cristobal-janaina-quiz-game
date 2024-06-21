@@ -71,12 +71,34 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  // const [selectedAnswer, setSelectedAnswer] = useState(null);
-  // const [checked, setChecked] = useState(false);
+
   const [showResult, setShowResult] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [time, setTime] = useState(0); // Estado para armazenar o tempo em segundos
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isRunning) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1); // Incrementa o tempo a cada segundo
+      }, 1000);
+    } else if (!isRunning && time !== 0) {
+      clearInterval(interval); // Limpa o intervalo se o cronômetro não estiver rodando
+    }
+
+    return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
+  }, [isRunning, time]);
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+
   // const [result, setResult] = useState({
   //   correctAnswers: 0,
   //   wrongAnswers: 0,
@@ -121,6 +143,10 @@ export default function Quiz() {
     }
     setAnswers([...answers, answer]);
 
+    if (activeQuestion + 1 === questions.length) {
+      setIsRunning(false);
+    }
+
     setTimeout(() => {
       if (activeQuestion + 1 < questions.length) {
         setActiveQuestion(activeQuestion + 1);
@@ -128,26 +154,19 @@ export default function Quiz() {
         addScore();
         setShowResult(true);
       }
-    }, 800);
+    }, 600);
   };
-  // setChecked(true);
-  // setSelectedAnswer(answer);
-  //   if (answer === questions[activeQuestion].correct) {
-  //     setSelectedAnswer(true);
-  //   } else {
-  //     setSelectedAnswer(false);
-  //   }
-  // };
 
   async function addScore() {
     const today = new Date();
     const finalDate = today.toISOString().split("T")[0];
-    const response = await fetch("/api/scores", {
+
+    await fetch("/api/scores", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId: session.user.name,
-        score: countCorrectAnswers(),
+        score: score(),
         date: finalDate,
         quizId: quizId,
       }),
@@ -158,25 +177,9 @@ export default function Quiz() {
     // }
   }
 
-  // const nextQuestion = () => {
-  //   setResult((prev) =>
-  //     selectedAnswer
-  //       ? {
-  //           ...prev,
-  //           score: prev.score + 1,
-  //           correctAnswers: prev.correctAnswers + 1,
-  //         }
-  //       : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-  //   );
-  //   if (activeQuestion !== questions.length - 1) {
-  //     setActiveQuestion((prev) => prev + 1);
-  //   } else {
-  //     setActiveQuestion(0);
-  //     setShowResult(true);
-  //     addScore(result);
-  //   }
-  //   // setChecked(false);
-  // };
+  const score = () => {
+    return countCorrectAnswers() * 1000 - time * 10;
+  };
 
   const countCorrectAnswers = () => {
     return questions
@@ -186,6 +189,7 @@ export default function Quiz() {
 
   const handleButtonPlay = () => {
     setShowInstructions(false);
+    setIsRunning(true);
   };
 
   return (
@@ -198,8 +202,12 @@ export default function Quiz() {
             <Title>Friends Quiz</Title>
             <div>
               <h2>
-                {activeQuestion + 1}
-                <span>/{questions.length}</span>
+                <span>
+                  {activeQuestion + 1}/{questions.length}
+                </span>
+              </h2>
+              <h2>
+                <span>Timer: {formatTime(time)}</span>
               </h2>
             </div>
 
@@ -234,9 +242,10 @@ export default function Quiz() {
           // <Results result={result} />
           <div>
             <h3>Results</h3>
-            <h3>Score: {countCorrectAnswers() * 1000}</h3>
+            <h3>Score: {score()}</h3>
             <h3>Correct: {countCorrectAnswers()}</h3>
             <h3>Wrong: {questions.length - countCorrectAnswers()}</h3>
+            <h3>Time: {formatTime(time)}</h3>
           </div>
         )}
       </section>
