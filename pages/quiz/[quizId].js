@@ -12,13 +12,15 @@ import Question from "@/db/models/Questions";
 import mongoose from "mongoose";
 
 const CardBox = styled.div`
-  position: relative;
-  widht: 500px;
+  width: 400px; /* Largura fixa */
+  height: 600px; /* Altura fixa */
   background: transparent;
   border: 2px solid orange;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  align-itemns: center;
   padding: 20px 30px;
   color: #666;
   transition: all 0.3s ease;
@@ -29,13 +31,16 @@ const CardBox = styled.div`
     display: flex;
     justify-content: space-between;
     alignt-items: start;
-    padding: 20px 0;
+    padding: 10px 0;
+    margin-bottom: 20px;
     border-bottom: 2px solid orange;
   }
 
   h3 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
+    position: absolute;
+    margin-bottom: 30px;
   }
 
   ul {
@@ -43,21 +48,21 @@ const CardBox = styled.div`
     padding: 12px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.2);
-
     font-size: 17px;
     text-decoration: none;
     margin: 10px 0;
     cursor: pointer;
+    position: absolute;
   }
 `;
 
 const Answers = styled.li`
   background-color: ${(props) =>
-    props.isSelected ? (props.isCorrect ? "green" : "red") : "white"};
+    props.isSelected ? (props.isCorrect ? "#7ce6b5" : "#ee5c5c") : "white"};
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
-  margin: 5px;
+  margin: 10px;
   cursor: pointer;
   ${(props) =>
     !props.disabled
@@ -65,18 +70,51 @@ const Answers = styled.li`
   &:hover {
     
     box-shadow: 3px 3px 3px 3px rgba(0, 0.5, 0.5, 0.4);
+    transition: 0.2s;
     opacity: 1.0;`
       : ""};
 `;
 
 const Title = styled.h1`
   color: #333;
-  font-size: 30px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background: linear-gradient(35deg, transparent, orange, transparent);
   padding: 20px;
   border-radius: 8px;
+  position: relative;
 `;
+
+const SectionResult = styled.section`
+  width: 400px; /* Largura fixa */
+  height: 600px; /* Altura fixa */
+  background: transparent;
+  border: 2px solid orange;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-itemns: center;
+  padding: 20px 30px;
+  color: #666;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0.5, 0.5, 0.4);
+
+  h3 {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    alignt-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid orange;
+  }
+`;
+
+const TitleContainer = styled.div``;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -278,13 +316,16 @@ export default function Quiz({ questions, quiz }) {
         )}
         {showResult && (
           // <Results result={result} />
-          <div>
-            <h3>Results</h3>
+          <SectionResult>
+            <TitleContainer>
+              <Title>Results</Title>
+            </TitleContainer>
+
             <h3>Score: {score()}</h3>
             <h3>Correct: {countCorrectAnswers()}</h3>
             <h3>Wrong: {questions.length - countCorrectAnswers()}</h3>
             <h3>Time: {formatTime(time)}</h3>
-          </div>
+          </SectionResult>
         )}
       </section>
 

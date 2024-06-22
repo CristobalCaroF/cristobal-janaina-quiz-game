@@ -13,16 +13,17 @@ export default createGlobalStyle`
 
   body {
     
-    height: 100vh; /* Garante que o body cubra a altura total da viewport */
+    height: 100%; /* Garante que o body cubra a altura total da viewport */
     width: 100vw;
-    margin: 0;
+    min-width: 480px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
     padding: 2rem;
     background-color: white;
-    display:flex;
-    justify-content: center;
     text-align: center;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
   
   }
@@ -46,3 +47,8 @@ export default createGlobalStyle`
 //     --secondary-color: #f24405;
 //     --primary-background: #d3d3d3;
 //   }
+
+// display:flex;
+//     justify-content: center;
+//     text-align: center;
+// width: 100vw;
