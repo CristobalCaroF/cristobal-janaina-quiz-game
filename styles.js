@@ -14,8 +14,8 @@ export default createGlobalStyle`
   body {
     
     height: 100%; /* Garante que o body cubra a altura total da viewport */
-    width: 100vw;
-    min-width: 480px;
+    width: 100%;
+    max-width: 768px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
     padding: 2rem;
     background-color: white;

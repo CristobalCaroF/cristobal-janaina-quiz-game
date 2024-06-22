@@ -13,7 +13,7 @@ import mongoose from "mongoose";
 
 const CardBox = styled.div`
   width: 400px; /* Largura fixa */
-  height: 600px; /* Altura fixa */
+  height: auto; /* Altura fixa */
   background: transparent;
   border: 2px solid orange;
   border-radius: 6px;
@@ -109,11 +109,9 @@ const SectionResult = styled.section`
     alignt-items: center;
     padding: 10px 0;
     margin-bottom: 20px;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid #ccc;
   }
 `;
-
-const TitleContainer = styled.div``;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -316,9 +314,9 @@ export default function Quiz({ questions, quiz }) {
         {showResult && (
           // <Results result={result} />
           <SectionResult>
-            <TitleContainer>
+            <div>
               <Title>Results</Title>
-            </TitleContainer>
+            </div>
 
             <h3>You win {score()} points!</h3>
             <h3 style={{ color: "#7ce6b5" }}>
