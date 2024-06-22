@@ -15,6 +15,7 @@ const StyledImage = styled(Image)`
   box-shadow: 2px 5px 5px rgba(0, 0.5, 0.5, 0.5);
   margin: 10px;
   border-radius: 100%;
+  border: 1px solid orange;
 `;
 
 const StyledLink = styled(Link)`
@@ -98,7 +99,7 @@ export default function ProfilePage() {
   return (
     <>
       <div className="header-container">
-        <h1>Profile</h1>
+        <h1 style={{ color: "#333" }}>Profile</h1>
       </div>
       <StyledImage
         src={`/api/profile/${session.user?.userId}/avatar`}

@@ -8,8 +8,6 @@ const QuizSchema = Quiz;
 const UserSchema = User;
 
 const scoresSchema = new Schema({
-  //   correctAnswers: { type: Number, required: true },
-  // wrongAnswers: { type: Number, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   score: { type: Number, required: true },
   date: { type: String, required: true },
