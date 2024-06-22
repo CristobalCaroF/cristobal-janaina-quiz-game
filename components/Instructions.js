@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SectionInstruc = styled.section`
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 49%;
   transform: translate(-50%, -50%) scale(0.9);
   width: 500px;
   border-radius: 8px;
