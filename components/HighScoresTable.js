@@ -35,7 +35,7 @@ const TableContainer = styled.div`
   padding: 20px;
 `;
 
-export default function HighScoresTable({ scores }) {
+export default function HighScoresTable({ scores, showQuizName }) {
   return (
     <TableContainer>
       <Table>
@@ -44,6 +44,7 @@ export default function HighScoresTable({ scores }) {
             <TableHeader>Date</TableHeader>
             <TableHeader>Score</TableHeader>
             <TableHeader>User</TableHeader>
+            {showQuizName && <TableHeader>Quiz</TableHeader>}
           </TableRow>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@ export default function HighScoresTable({ scores }) {
               <TableCell>{score.date}</TableCell>
               <TableCell>{score.score}</TableCell>
               <TableCell>{score.user}</TableCell>
+              {showQuizName && <TableCell>{score.quiz}</TableCell>}
             </TableRow>
           ))}
         </tbody>

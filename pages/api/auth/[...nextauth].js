@@ -1,7 +1,5 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import clientPromise from "@/db/mongodb";
 import dbConnect from "@/db/dbConnect";
 import User from "@/db/models/User";
 
@@ -30,7 +28,6 @@ export const authOptions = {
         user: {
           ...session.user,
           userId: user._id,
-          // image: "/api/profile/6675a46502d08c6125404d23/avatar",
         },
       };
     },

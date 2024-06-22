@@ -113,8 +113,6 @@ const SectionResult = styled.section`
   }
 `;
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
 function shuffle(array) {
   // Fisher Yates algorithm
   let currentIndex = array.length,
@@ -182,35 +180,6 @@ export default function Quiz({ questions, quiz }) {
   const router = useRouter();
   const { quizId } = router.query;
   const { data: session } = useSession();
-
-  // const { data, error, isLoading, mutate } = useSWR(
-  //   `/api/questions/${quizId}`,
-  //   fetcher
-  // );
-
-  // useEffect(() => {
-  //   const selectedQuestions = [];
-
-  //   if (data) {
-  //     for (let i = 0; i < 10; i++) {
-  //       let idx = Math.floor(Math.random() * data.length);
-  //       selectedQuestions.push(data[idx]);
-  //       data.splice(idx, 1);
-  //     }
-  //     for (let question of selectedQuestions) {
-  //       for (let i = question.answers.length - 1; i > 0; i--) {
-  //         const j = Math.floor(Math.random() * (i + 1));
-  //         [question.answers[i], question.answers[j]] = [
-  //           question.answers[j],
-  //           question.answers[i],
-  //         ];
-  //       }
-  //     }
-  //     setQuestions(selectedQuestions);
-  //   }
-  // }, [data]);
-
-  // if (isLoading || error || !questions.length) return null;
 
   const onAnswerSelected = (answer) => {
     if (answers[activeQuestion] !== undefined) {
@@ -298,17 +267,6 @@ export default function Quiz({ questions, quiz }) {
                 <li style={{ listStyleType: "none" }}>{answer}</li>
               </Answers>
             ))}
-
-            {/* {checked ? (
-              <Buttonnext onClick={nextQuestion}>
-                {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </Buttonnext>
-            ) : (
-              <Buttonnext disabled>
-                {" "}
-                {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </Buttonnext>
-            )} */}
           </CardBox>
         )}
         {showResult && (
