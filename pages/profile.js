@@ -18,21 +18,17 @@ const StyledImage = styled(Image)`
   border: 1px solid orange;
 `;
 
-const StyledLink = styled(Link)`
-  margin: 10px;
-`;
-
-async function uploadFile(urlPath, { arg }) {
-  await fetch(urlPath.join(""), {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      avatar: arg,
-    }),
-  });
-}
+// async function uploadFile(urlPath, { arg }) {
+//   await fetch(urlPath.join(""), {
+//     method: "POST",
+//     headers: {
+//       "Content-type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       avatar: arg,
+//     }),
+//   });
+// }
 
 const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
 

@@ -1,6 +1,5 @@
-import useSWR from "swr";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
@@ -89,13 +88,7 @@ export default function HighScores({ scores, quizzes }) {
       )}
       <div>
         <Link href="/">
-          <Image
-            width={30}
-            height={30}
-            priority
-            src={homeIcon}
-            alt="home-page"
-          />
+          <Image width={30} height={30} src={homeIcon} alt="home-page" />
         </Link>
       </div>
     </div>
