@@ -39,7 +39,6 @@ const CardBox = styled.div`
   h3 {
     font-size: 22px;
     font-weight: 600;
-    position: absolute;
     margin-bottom: 30px;
   }
 
@@ -321,9 +320,13 @@ export default function Quiz({ questions, quiz }) {
               <Title>Results</Title>
             </TitleContainer>
 
-            <h3>Score: {score()}</h3>
-            <h3>Correct: {countCorrectAnswers()}</h3>
-            <h3>Wrong: {questions.length - countCorrectAnswers()}</h3>
+            <h3>You win {score()} points!</h3>
+            <h3 style={{ color: "#7ce6b5" }}>
+              Correct: {countCorrectAnswers()}
+            </h3>
+            <h3 style={{ color: "#ee5c5c" }}>
+              Wrong: {questions.length - countCorrectAnswers()}
+            </h3>
             <h3>Time: {formatTime(time)}</h3>
           </SectionResult>
         )}
