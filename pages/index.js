@@ -63,14 +63,3 @@ export default function Home() {
     </>
   );
 }
-
-// export async function getServerSideProps() {
-// await dbConnect();
-// const quizzes = await Quiz.find().lean();
-// return {
-//   props: {
-//     quizzes: quizzes.map((quiz) => ({ ...quiz, _id: quiz._id.toString() })),
-//   },
-// };
-//   return { props: {} };
-// }

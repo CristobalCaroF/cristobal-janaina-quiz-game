@@ -15,18 +15,22 @@ const CardBox = styled.div`
   position: relative;
   widht: 500px;
   background: transparent;
-  border: 2px solid #c40094;
+  border: 2px solid orange;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
+  color: #666;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0.5, 0.5, 0.4);
 
   h2 {
     font-size: 15px;
     display: flex;
+    justify-content: space-between;
     alignt-items: start;
     padding: 20px 0;
-    border-bottom: 2px solid #c40094;
+    border-bottom: 2px solid orange;
   }
 
   h3 {
@@ -50,7 +54,6 @@ const CardBox = styled.div`
 const Answers = styled.li`
   background-color: ${(props) =>
     props.isSelected ? (props.isCorrect ? "green" : "red") : "white"};
-  color: "black";
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -60,15 +63,19 @@ const Answers = styled.li`
     !props.disabled
       ? `
   &:hover {
-    background-color: "green";
-    border-color: rgba(255, 255, 255, 0.1);`
-      : ``}
+    
+    box-shadow: 3px 3px 3px 3px rgba(0, 0.5, 0.5, 0.4);
+    opacity: 1.0;`
+      : ""};
 `;
 
 const Title = styled.h1`
-  font-size: 32px;
+  color: #333;
+  font-size: 30px;
   text-align: center;
-  background: linear-gradient(45deg, transparent, #c40094, transparent);
+  background: linear-gradient(35deg, transparent, orange, transparent);
+  padding: 20px;
+  border-radius: 8px;
 `;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -238,8 +245,6 @@ export default function Quiz({ questions, quiz }) {
                 <span>
                   {activeQuestion + 1}/{questions.length}
                 </span>
-              </h2>
-              <h2>
                 <span>Timer: {formatTime(time)}</span>
               </h2>
             </div>

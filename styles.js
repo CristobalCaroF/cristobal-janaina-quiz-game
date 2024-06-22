@@ -1,22 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
   *, 
   *::before,
   *::after {
     box-sizing: border-box;
   }
 
- 
 
   body {
     
     height: 100vh; /* Garante que o body cubra a altura total da viewport */
     width: 100vw;
     margin: 0;
-    font-family: system-ui;
+    font-family: "Montserrat", "DM Sans", verdana, sans-serif;
     padding: 2rem;
-    background-color: rgb(242, 140, 6);
+    background-color: white;
     display:flex;
     justify-content: center;
     text-align: center;
