@@ -7,6 +7,7 @@ const Table = styled.table`
   box-shadow: 2px 5px 5px rgba(0, 0.5, 0.5, 0.5);
   border-radius: 8px;
   overflow: hidden;
+
   color: #666;
 `;
 

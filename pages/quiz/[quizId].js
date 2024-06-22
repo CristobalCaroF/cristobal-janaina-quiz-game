@@ -240,7 +240,7 @@ export default function Quiz({ questions, quiz }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId: session.user.userId,
+        user: session.user.userId,
         score: score(),
         date: finalDate,
         quizId: quizId,
