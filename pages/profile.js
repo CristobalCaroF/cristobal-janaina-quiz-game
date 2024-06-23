@@ -18,6 +18,17 @@ const StyledImage = styled(Image)`
   border: 1px solid orange;
 `;
 
+const IconHome = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  color: white;
+`;
+
 // async function uploadFile(urlPath, { arg }) {
 //   await fetch(urlPath.join(""), {
 //     method: "POST",
@@ -31,11 +42,16 @@ const StyledImage = styled(Image)`
 // }
 
 const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
+const hasAvatarFetcher = (urlPath) =>
+  fetch(urlPath.join("")).then((res) => res.status === 200);
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const [avatarImage, setAvatarImage] = useState();
-
+  const { data: hasAvatar, mutate } = useSWR(
+    ["/api/profile/", session?.user?.userId, "/avatar"],
+    hasAvatarFetcher
+  );
   // const { trigger } = useSWRMutation(
   //   ["/api/profile/", session?.user?.userId, "/avatar"],
   //   uploadFile
@@ -78,8 +94,9 @@ export default function ProfilePage() {
       body: JSON.stringify(avatarImage),
     });
     setTimeout(() => {
+      mutate();
       setRefreshKey(Date.now());
-    }, 500);
+    }, 1000);
     formElement.reset();
   }
 
@@ -88,8 +105,9 @@ export default function ProfilePage() {
       method: "DELETE",
     });
     setTimeout(() => {
+      mutate();
       setRefreshKey(Date.now());
-    }, 500);
+    }, 1000);
   };
 
   return (
@@ -110,17 +128,17 @@ export default function ProfilePage() {
       <PictureForm
         handleSubmit={handleSubmit}
         handleChangeAvatar={handleChangeAvatar}
-        showDelete={true}
+        showDelete={hasAvatar}
         onDelete={handleDelete}
       />
       <ScoresTable scores={scores} />
 
       <DarkModeToggle />
-      <div>
+      <IconHome>
         <Link href="/">
           <Image priority src={homeIcon} alt="home-page" />
         </Link>
-      </div>
+      </IconHome>
     </>
   );
 }

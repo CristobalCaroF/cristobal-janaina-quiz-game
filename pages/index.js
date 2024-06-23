@@ -5,13 +5,14 @@ import { useSession } from "next-auth/react";
 import Router, { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
+import LoginButton from "@/components/LoginButton";
 
 const ImageContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 20px; /* Espaço entre as imagens */
   width: 80%; /* Ajusta a largura do contêiner */
-  max-width: 600px; /* Limite de largura para telas maiores */
+  max-width: 768px; /* Limite de largura para telas maiores */
   margin: auto;
   padding: 20px;
 `;
@@ -38,6 +39,11 @@ export default function Home() {
 
   return (
     <>
+      <div>
+        <button type="button " onClick={() => router.push("/highscores")}>
+          HIGHSCORES
+        </button>
+      </div>
       <ProfileInfo session={session} />
       <div>
         <Nav />
@@ -55,10 +61,12 @@ export default function Home() {
           PLAY
         </button>
       </div> */}
+
+      <p style={{ fontSize: "12px" }}>
+        You are signed in as {session.user?.email}
+      </p>
       <div>
-        <button type="button " onClick={() => router.push("/highscores")}>
-          HIGHSCORES
-        </button>
+        <LoginButton />
       </div>
     </>
   );

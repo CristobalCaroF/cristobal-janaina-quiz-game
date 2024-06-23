@@ -3,13 +3,12 @@ import styled from "styled-components";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 80%;
-  max-width: 400px;
-  margin: 0 auto;
+  max-width: 768px;
+  margin: auto;
   padding: 10px;
-  box-shadow: 2px 10px 5px rgba(0, 0.5, 0.5, 0.5);
+
   border-radius: 10px;
 `;
 
@@ -20,26 +19,36 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  color: #333;
   padding: 5px;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid orange;
   border-radius: 5px;
   font-size: 12px;
+`;
+
+const ButtonContainer = styled.div`
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px;
+  margin-left: 4px;
 `;
 
 const Button = styled.button`
   padding: 5px 10px;
   font-size: 12px;
-  color: #fff;
-  background-color: #26355d;
+  color: #666;
+  background-color: orange;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: transparent;
   }
 `;
 
@@ -58,12 +67,14 @@ export default function PictureForm({
     <Form onSubmit={handleSubmit}>
       <Label htmlFor="file">Change profile picture</Label>
       <Input type="file" name="file" onChange={handleChangeAvatar} />
-      <Button type="submit">Upload</Button>
-      {showDelete && (
-        <Button type="button" onClick={handleDelete}>
-          Delete Image
-        </Button>
-      )}
+      <ButtonContainer>
+        <Button type="submit">Upload</Button>
+        {showDelete && (
+          <Button type="button" onClick={handleDelete}>
+            Delete Image
+          </Button>
+        )}
+      </ButtonContainer>
     </Form>
   );
 }
