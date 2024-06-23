@@ -7,24 +7,19 @@ export default createGlobalStyle`
   *, 
   *::before,
   *::after {
-    box-sizing: border-box;
+    // box-sizing: border-box;
   }
 
 
   body {
-    
     height: 100%; /* Garante que o body cubra a altura total da viewport */
     width: 100%;
     max-width: 768px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
-    padding: 2rem;
     background-color: white;
     text-align: center;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+    margin: 0px;
   
   }
 

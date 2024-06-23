@@ -8,21 +8,12 @@ import HighScoresTable from "@/components/HighScoresTable";
 import Scores from "@/db/models/Scores";
 import dbConnect from "@/db/dbConnect";
 import Quiz from "@/db/models/Quiz";
+import Nav from "@/components/Nav";
+import Container from "@/components/Container";
 
 const Table = styled.table`
   display: flex;
   justify-content: center;
-`;
-
-const IconHome = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 1000;
-  color: white;
 `;
 
 export async function getServerSideProps(context) {
@@ -72,11 +63,10 @@ export default function HighScores({ scores, quizzes }) {
   }
 
   return (
-    <div>
-      <h1>High Scores</h1>
-      <hr />
-      <label>
-        Select a quiz:
+    <>
+      <Nav title="Highscores" showHome={true} />
+      <Container>
+        Quiz:
         <select
           onChange={(e) => {
             handleQuizFilter(e.target.value);
@@ -89,19 +79,13 @@ export default function HighScores({ scores, quizzes }) {
             </option>
           ))}
         </select>
-      </label>
-      <hr />
-      <h3>{quizzes.find((quiz) => quiz._id === selectedQuiz)?.name}</h3>
-      {scores.length > 0 ? (
-        <HighScoresTable scores={scores} showQuizName={selectedQuiz === ""} />
-      ) : (
-        <p style={{ color: "#333" }}>No scores found</p>
-      )}
-      <IconHome>
-        <Link href="/">
-          <Image width={30} height={30} src={homeIcon} alt="home-page" />
-        </Link>
-      </IconHome>
-    </div>
+        <hr />
+        {scores.length > 0 ? (
+          <HighScoresTable scores={scores} showQuizName={selectedQuiz === ""} />
+        ) : (
+          <p style={{ color: "#333" }}>No scores found</p>
+        )}
+      </Container>
+    </>
   );
 }

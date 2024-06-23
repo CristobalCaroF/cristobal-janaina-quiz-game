@@ -32,7 +32,7 @@ const TableContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
 `;
 
 export default function HighScoresTable({ scores, showQuizName }) {

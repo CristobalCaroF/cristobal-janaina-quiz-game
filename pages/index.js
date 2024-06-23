@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import LoginButton from "@/components/LoginButton";
+import Container from "@/components/Container";
 
 const ImageContainer = styled.section`
   display: flex;
@@ -14,7 +15,7 @@ const ImageContainer = styled.section`
   width: 80%; /* Ajusta a largura do contêiner */
   max-width: 768px; /* Limite de largura para telas maiores */
   margin: auto;
-  padding: 20px;
+  padding: 10px;
 `;
 
 const Imagens = styled.img`
@@ -39,11 +40,13 @@ export default function Home() {
 
   return (
     <>
-      {/* <ProfileInfo session={session} /> */}
-      {/* <div> */}
-      <Nav />
-      {/* </div> */}
-      <div style={{ marginTop: "120px" }}>
+      <Nav
+        title="TV Show Game"
+        username={session.user?.name}
+        showHighscore={true}
+        showProfile={true}
+      />
+      <Container>
         <ImageContainer>
           {quizzes?.map((quiz) => (
             <a href={`/quiz/${quiz._id}`}>
@@ -51,12 +54,7 @@ export default function Home() {
             </a>
           ))}
         </ImageContainer>
-
-        {/* <div>
-        <button type="button " onClick={() => router.push("/quiz")}>
-          PLAY
-        </button>
-      </div> */}
+        <hr />
 
         <p style={{ fontSize: "12px" }}>
           You are signed in as {session.user?.email}
@@ -64,7 +62,7 @@ export default function Home() {
         <div>
           <LoginButton />
         </div>
-      </div>
+      </Container>
     </>
   );
 }
