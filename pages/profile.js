@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import useSWR from "swr";
@@ -10,6 +10,9 @@ import styled from "styled-components";
 import homeIcon from "/public/home-black.png";
 import ScoresTable from "@/components/ScoresTable";
 import PictureForm from "@/components/PictureForm";
+import Nav from "@/components/Nav";
+import Container from "@/components/Container";
+import LoginButton from "@/components/LoginButton";
 
 const StyledImage = styled(Image)`
   box-shadow: 2px 5px 5px rgba(0, 0.5, 0.5, 0.5);
@@ -64,6 +67,12 @@ export default function ProfilePage() {
     fetcher
   );
 
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
+    }
+  }, [session]);
+
   if (!session) {
     return;
   }
@@ -112,33 +121,37 @@ export default function ProfilePage() {
 
   return (
     <>
-      <div className="header-container">
-        <h1 style={{ color: "#333" }}>Profile</h1>
-      </div>
-      <StyledImage
-        src={`/api/profile/${session.user?.userId}/avatar`}
-        loader={(params) =>
-          `${params.src}?github=${session.user?.image}&refreshKey=${refreshKey}`
-        }
-        key={refreshKey}
-        alt="User Avatar"
-        width={100}
-        height={100}
-      />
-      <PictureForm
-        handleSubmit={handleSubmit}
-        handleChangeAvatar={handleChangeAvatar}
-        showDelete={hasAvatar}
-        onDelete={handleDelete}
-      />
-      <ScoresTable scores={scores} />
+      <Nav title="Profile" showHome={true} />
+      <Container>
+        <div>
+          <p style={{ fontSize: "12px" }}>
+            You are signed in as {session.user?.email}
+          </p>
+          <div>
+            <LoginButton />
+          </div>
 
-      <DarkModeToggle />
-      <IconHome>
-        <Link href="/">
-          <Image priority src={homeIcon} alt="home-page" />
-        </Link>
-      </IconHome>
+          <StyledImage
+            src={`/api/profile/${session.user?.userId}/avatar`}
+            loader={(params) =>
+              `${params.src}?github=${session.user?.image}&refreshKey=${refreshKey}`
+            }
+            key={refreshKey}
+            alt="User Avatar"
+            width={100}
+            height={100}
+          />
+          <PictureForm
+            handleSubmit={handleSubmit}
+            handleChangeAvatar={handleChangeAvatar}
+            showDelete={hasAvatar}
+            onDelete={handleDelete}
+          />
+          <ScoresTable scores={scores} />
+
+          <DarkModeToggle />
+        </div>
+      </Container>
     </>
   );
 }

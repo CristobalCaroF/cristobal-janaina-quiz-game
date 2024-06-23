@@ -66,25 +66,30 @@ export default function HighScores({ scores, quizzes }) {
     <>
       <Nav title="Highscores" showHome={true} />
       <Container>
-        Quiz:
-        <select
-          onChange={(e) => {
-            handleQuizFilter(e.target.value);
-          }}
-        >
-          <option value="">All</option>
-          {quizzes?.map((quiz) => (
-            <option key={quiz._id} value={quiz._id}>
-              {quiz.name}
-            </option>
-          ))}
-        </select>
-        <hr />
-        {scores.length > 0 ? (
-          <HighScoresTable scores={scores} showQuizName={selectedQuiz === ""} />
-        ) : (
-          <p style={{ color: "#333" }}>No scores found</p>
-        )}
+        <div>
+          Quiz:
+          <select
+            onChange={(e) => {
+              handleQuizFilter(e.target.value);
+            }}
+          >
+            <option value="">All</option>
+            {quizzes?.map((quiz) => (
+              <option key={quiz._id} value={quiz._id}>
+                {quiz.name}
+              </option>
+            ))}
+          </select>
+          <hr />
+          {scores.length > 0 ? (
+            <HighScoresTable
+              scores={scores}
+              showQuizName={selectedQuiz === ""}
+            />
+          ) : (
+            <p style={{ color: "#333" }}>No scores found</p>
+          )}
+        </div>
       </Container>
     </>
   );
