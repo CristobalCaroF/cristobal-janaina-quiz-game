@@ -42,11 +42,16 @@ const IconHome = styled.div`
 // }
 
 const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
+const hasAvatarFetcher = (urlPath) =>
+  fetch(urlPath.join("")).then((res) => res.status === 200);
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const [avatarImage, setAvatarImage] = useState();
-
+  const { data: hasAvatar, mutate } = useSWR(
+    ["/api/profile/", session?.user?.userId, "/avatar"],
+    hasAvatarFetcher
+  );
   // const { trigger } = useSWRMutation(
   //   ["/api/profile/", session?.user?.userId, "/avatar"],
   //   uploadFile
@@ -89,8 +94,9 @@ export default function ProfilePage() {
       body: JSON.stringify(avatarImage),
     });
     setTimeout(() => {
+      mutate();
       setRefreshKey(Date.now());
-    }, 500);
+    }, 1000);
     formElement.reset();
   }
 
@@ -99,8 +105,9 @@ export default function ProfilePage() {
       method: "DELETE",
     });
     setTimeout(() => {
+      mutate();
       setRefreshKey(Date.now());
-    }, 500);
+    }, 1000);
   };
 
   return (
@@ -121,7 +128,7 @@ export default function ProfilePage() {
       <PictureForm
         handleSubmit={handleSubmit}
         handleChangeAvatar={handleChangeAvatar}
-        showDelete={true}
+        showDelete={hasAvatar}
         onDelete={handleDelete}
       />
       <ScoresTable scores={scores} />
