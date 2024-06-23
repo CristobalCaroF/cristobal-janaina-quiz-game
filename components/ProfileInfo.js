@@ -23,7 +23,7 @@ export default function ProfileInfo({ session }) {
   }
   return (
     <Section>
-      <Headline style={{ fontSize: "36px" }}>TV SHOW GAME</Headline>
+      {/* <Headline style={{ fontSize: "36px" }}>TV SHOW GAME</Headline> */}
       {/* <h1>Hello {session.user?.name}</h1> */}
     </Section>
   );

@@ -39,34 +39,31 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <button type="button " onClick={() => router.push("/highscores")}>
-          HIGHSCORES
-        </button>
-      </div>
-      <ProfileInfo session={session} />
-      <div>
-        <Nav />
-      </div>
-      <ImageContainer>
-        {quizzes?.map((quiz) => (
-          <a href={`/quiz/${quiz._id}`}>
-            <Imagens src={quiz.imageUrl} alt={quiz.name} />
-          </a>
-        ))}
-      </ImageContainer>
+      {/* <ProfileInfo session={session} /> */}
+      {/* <div> */}
+      <Nav />
+      {/* </div> */}
+      <div style={{ marginTop: "120px" }}>
+        <ImageContainer>
+          {quizzes?.map((quiz) => (
+            <a href={`/quiz/${quiz._id}`}>
+              <Imagens src={quiz.imageUrl} alt={quiz.name} />
+            </a>
+          ))}
+        </ImageContainer>
 
-      {/* <div>
+        {/* <div>
         <button type="button " onClick={() => router.push("/quiz")}>
           PLAY
         </button>
       </div> */}
 
-      <p style={{ fontSize: "12px" }}>
-        You are signed in as {session.user?.email}
-      </p>
-      <div>
-        <LoginButton />
+        <p style={{ fontSize: "12px" }}>
+          You are signed in as {session.user?.email}
+        </p>
+        <div>
+          <LoginButton />
+        </div>
       </div>
     </>
   );

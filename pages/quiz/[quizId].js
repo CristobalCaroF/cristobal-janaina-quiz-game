@@ -12,8 +12,8 @@ import Question from "@/db/models/Questions";
 import mongoose from "mongoose";
 
 const CardBox = styled.div`
-  width: 400px; /* Largura fixa */
-  height: auto; /* Altura fixa */
+  // width: 400px; /* Largura fixa */
+  // height: auto; /* Altura fixa */
   background: transparent;
   border: 2px solid orange;
   border-radius: 6px;
@@ -40,6 +40,10 @@ const CardBox = styled.div`
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 30px;
+
+    @media (max-width: 450px) {
+      font-size: 14px;
+    }
   }
 
   ul {
@@ -61,6 +65,7 @@ const Answers = styled.li`
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
+  font-size: 17px;
   margin: 10px;
   cursor: pointer;
   ${(props) =>
@@ -72,6 +77,11 @@ const Answers = styled.li`
     transition: 0.2s;
     opacity: 1.0;`
       : ""};
+  }
+  
+  @media (max-width: 450px) {
+    font-size: 14px;
+  }
 `;
 
 const Title = styled.h1`

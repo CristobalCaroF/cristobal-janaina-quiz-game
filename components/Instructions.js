@@ -5,7 +5,8 @@ const SectionInstruc = styled.section`
   top: 50%;
   left: 49%;
   transform: translate(-50%, -50%) scale(0.9);
-  width: 500px;
+  min-width: 350px;
+  // max-width: 500px;
   border-radius: 8px;
   border: 1px solid orange;
   background: #fff;

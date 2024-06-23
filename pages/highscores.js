@@ -14,6 +14,17 @@ const Table = styled.table`
   justify-content: center;
 `;
 
+const IconHome = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  color: white;
+`;
+
 export async function getServerSideProps(context) {
   let filter = {};
   if (context.query.quizId) {
@@ -86,11 +97,11 @@ export default function HighScores({ scores, quizzes }) {
       ) : (
         <p style={{ color: "#333" }}>No scores found</p>
       )}
-      <div>
+      <IconHome>
         <Link href="/">
           <Image width={30} height={30} src={homeIcon} alt="home-page" />
         </Link>
-      </div>
+      </IconHome>
     </div>
   );
 }
