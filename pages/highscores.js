@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
-import Link from "next/link";
-import homeIcon from "/public/home-black.png";
 import HighScoresTable from "@/components/HighScoresTable";
 import Scores from "@/db/models/Scores";
 import dbConnect from "@/db/dbConnect";

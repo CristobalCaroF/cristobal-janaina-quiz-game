@@ -15,12 +15,12 @@ const Form = styled.form`
 const Label = styled.label`
   margin-bottom: 10px;
   font-size: 12px;
-  color: #333;
+  color: var(--settingsFontColor);
 `;
 
 const Input = styled.input`
   margin-bottom: 10px;
-  color: #333;
+  color: var(--settingsFontColor);
   padding: 5px;
   width: 100%;
   border: 1px solid orange;
@@ -40,7 +40,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   padding: 5px 10px;
   font-size: 12px;
-  color: #666;
+  color: var(--settingsFontColor);
   background-color: orange;
   border: none;
   border-radius: 5px;

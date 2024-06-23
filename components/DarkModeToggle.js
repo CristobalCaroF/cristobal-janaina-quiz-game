@@ -46,7 +46,7 @@ const ToggleContainer = styled.div`
 const Label = styled.label`
   margin-bottom: 10px;
   font-size: 12px;
-  color: #333;
+  color: var(--settingsFontColor);
 `;
 
 const DarkModeToggle = () => {

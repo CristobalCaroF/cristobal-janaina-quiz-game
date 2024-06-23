@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button } from "./Container";
 
 const ButtonLogin = styled.button`
-  color: black;
+  color: var(--settingsFontColor);
   border: none;
   background-color: rgb(151, 108, 192);
   font-size: 12px;

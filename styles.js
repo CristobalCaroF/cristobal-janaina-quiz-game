@@ -16,11 +16,16 @@ export default createGlobalStyle`
     width: 100%;
     // max-width: 768px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
-    background-color: --background;
+    background-color: var(--background);
     text-align: center;
     text-decoration: none;
     margin: 0px;
+    transition: background-color var(0.3s), color var(0.3s);
   }
+
+  html {
+  transition: background-color var(0.3s), color var(0.3s);
+}
 
 
 :root {
@@ -30,8 +35,9 @@ export default createGlobalStyle`
 }
 
 [data-theme='dark'] {
-  --background: #0a0b2a;
+  --background: #02001c;
   --foreground: white;
+  --settingsFontColor: white
 }
 
 `;
