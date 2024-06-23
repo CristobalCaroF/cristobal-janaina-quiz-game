@@ -10,6 +10,8 @@ import dbConnect from "@/db/dbConnect";
 import QuizModel from "@/db/models/Quiz";
 import Question from "@/db/models/Questions";
 import mongoose from "mongoose";
+import Nav from "@/components/Nav";
+import Container, { Box, Center } from "@/components/Container";
 
 const CardBox = styled.div`
   // width: 400px; /* Largura fixa */
@@ -91,7 +93,6 @@ const Title = styled.h1`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(35deg, transparent, orange, transparent);
   padding: 20px;
   border-radius: 8px;
   position: relative;
@@ -247,18 +248,17 @@ export default function Quiz({ questions, quiz }) {
   };
 
   return (
-    <div>
-      <section>
+    <>
+      <Nav title={`${quiz} Quiz`} showHome={true} />
+      <Container>
         {showInstructions && <Instructions onClick={handleButtonPlay} />}
-        {/* <QuizCard title={questions[activeQuestion].question} /> */}
         {!showInstructions && !showResult && (
-          <CardBox>
-            <Title>{quiz} Quiz</Title>
-            <div>
+          <Box>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>
-                <span>
-                  {activeQuestion + 1}/{questions.length}
-                </span>
+                {activeQuestion + 1}/{questions.length}
+              </h2>
+              <h2>
                 <span> {formatTime(time)}</span>
               </h2>
             </div>
@@ -277,30 +277,30 @@ export default function Quiz({ questions, quiz }) {
                 <li style={{ listStyleType: "none" }}>{answer}</li>
               </Answers>
             ))}
-          </CardBox>
+          </Box>
         )}
         {showResult && (
-          // <Results result={result} />
-          <SectionResult>
-            <div>
-              <Title>Results</Title>
-            </div>
+          <Center>
+            <Box>
+              {/* // <Results result={result} /> */}
+              {/* <SectionResult> */}
+              <div>
+                <Title>Results</Title>
+              </div>
 
-            <h3>You win {score()} points!</h3>
-            <h3 style={{ color: "#7ce6b5" }}>
-              Correct: {countCorrectAnswers()}
-            </h3>
-            <h3 style={{ color: "#ee5c5c" }}>
-              Wrong: {questions.length - countCorrectAnswers()}
-            </h3>
-            <h3>Time: {formatTime(time)}</h3>
-          </SectionResult>
+              <h3>You win {score()} points!</h3>
+              <h3 style={{ color: "#7ce6b5" }}>
+                Correct: {countCorrectAnswers()}
+              </h3>
+              <h3 style={{ color: "#ee5c5c" }}>
+                Wrong: {questions.length - countCorrectAnswers()}
+              </h3>
+              <h3>Time: {formatTime(time)}</h3>
+              {/* </SectionResult> */}
+            </Box>
+          </Center>
         )}
-      </section>
-
-      <button type="button" onClick={() => router.back()}>
-        Quit quiz
-      </button>
-    </div>
+      </Container>
+    </>
   );
 }

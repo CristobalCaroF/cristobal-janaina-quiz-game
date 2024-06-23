@@ -1,21 +1,20 @@
 import Nav from "@/components/Nav";
-import ProfileInfo from "@/components/ProfileInfo";
 import SignIn from "@/components/SignIn";
 import { useSession } from "next-auth/react";
-import Router, { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import LoginButton from "@/components/LoginButton";
 import Container from "@/components/Container";
+import LoginButton from "@/components/LoginButton";
 
-const ImageContainer = styled.section`
+const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   gap: 20px; /* Espaço entre as imagens */
-  width: 80%; /* Ajusta a largura do contêiner */
   max-width: 768px; /* Limite de largura para telas maiores */
-  margin: auto;
+  // margin: auto;
   padding: 10px;
+  // width: 100%;
 `;
 
 const Imagens = styled.img`
@@ -29,7 +28,6 @@ const Imagens = styled.img`
 
 export default function Home() {
   const { data: session } = useSession();
-  const router = useRouter();
   const { data: quizzes } = useSWR("/api/quizzes");
 
   // console.log(quizzes);
@@ -54,14 +52,6 @@ export default function Home() {
             </a>
           ))}
         </ImageContainer>
-        <hr />
-
-        <p style={{ fontSize: "12px" }}>
-          You are signed in as {session.user?.email}
-        </p>
-        <div>
-          <LoginButton />
-        </div>
       </Container>
     </>
   );

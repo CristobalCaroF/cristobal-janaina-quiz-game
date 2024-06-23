@@ -1,5 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
+import { Button } from "./Container";
 
 const ButtonLogin = styled.button`
   color: black;
@@ -21,15 +22,7 @@ const ButtonLogin = styled.button`
 export default function LoginButton() {
   const { data: session } = useSession();
   if (session) {
-    return (
-      <>
-        <ButtonLogin onClick={() => signOut()}>Sign out</ButtonLogin>
-      </>
-    );
+    return <Button onClick={() => signOut()}>Sign out</Button>;
   }
-  return (
-    <>
-      <ButtonLogin onClick={() => signIn()}>Sign in</ButtonLogin>
-    </>
-  );
+  return <Button onClick={() => signIn()}>Sign In</Button>;
 }
