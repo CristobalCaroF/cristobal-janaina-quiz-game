@@ -249,7 +249,7 @@ export default function Quiz({ questions, quiz }) {
                 <span>
                   {activeQuestion + 1}/{questions.length}
                 </span>
-                <span>Timer: {formatTime(time)}</span>
+                <span> {formatTime(time)}</span>
               </h2>
             </div>
 

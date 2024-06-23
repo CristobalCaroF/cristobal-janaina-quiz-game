@@ -47,13 +47,18 @@ const ButtonDiv = styled.div`
 `;
 
 const Button = styled.button`
-  font-size: 11px;
-  width: 90px;
-  height: 20px;
-  background: orange;
-  outline: none;
-  border-radius: 25px;
-  border: 1px solid black;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #666;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: transparent;
+  }
 `;
 
 export default function Instructions({ onClick }) {
