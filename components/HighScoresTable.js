@@ -2,37 +2,45 @@ import styled from "styled-components";
 
 const Table = styled.table`
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
   border-collapse: collapse;
-  box-shadow: 2px 10px 5px rgba(0, 0.5, 0.5, 0.5);
+  box-shadow: 2px 5px 5px rgba(0, 0.5, 0.5, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  color: #666;
 `;
 
 const TableHeader = styled.th`
-  background-color: #26355d;
-  color: #fff;
+  color: #666;
   padding: 10px;
   text-align: center;
   font-size: 12px;
+  margin-bottom: 6px;
 `;
 
+const TableHea = styled.thead`
+  border-bottom: 6px;
+`;
 const TableRow = styled.tr`
   &:nth-child(even) {
-    background-color: rgb(222, 164, 89);
+    background-color: orange;
   }
+  margin-bottom: 6px;
 `;
 
 const TableCell = styled.td`
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
   font-size: 12px;
+  margin-bottom: 6px;
 `;
 
 const TableContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
+  margin-top: 2px;
 `;
 
 export default function HighScoresTable({ scores, showQuizName }) {

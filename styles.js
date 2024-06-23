@@ -16,7 +16,7 @@ export default createGlobalStyle`
     width: 100%;
     // max-width: 768px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
-    background-color: white;
+    background-color: --background;
     text-align: center;
     text-decoration: none;
     margin: 0px;
@@ -30,19 +30,8 @@ export default createGlobalStyle`
 }
 
 [data-theme='dark'] {
-  --background: black;
+  --background: #0a0b2a;
   --foreground: white;
 }
 
 `;
-
-// :root {
-//     --primary-color: #22babb;
-//     --secondary-color: #f24405;
-//     --primary-background: #d3d3d3;
-//   }
-
-// display:flex;
-//     justify-content: center;
-//     text-align: center;
-// width: 100vw;

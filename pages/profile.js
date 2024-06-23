@@ -1,13 +1,10 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useId, useState } from "react";
-import useSWRMutation from "swr/mutation";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import homeIcon from "/public/home-black.png";
 import ScoresTable from "@/components/ScoresTable";
 import PictureForm from "@/components/PictureForm";
 import Nav from "@/components/Nav";
@@ -32,18 +29,6 @@ const IconHome = styled.div`
   color: white;
 `;
 
-// async function uploadFile(urlPath, { arg }) {
-//   await fetch(urlPath.join(""), {
-//     method: "POST",
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       avatar: arg,
-//     }),
-//   });
-// }
-
 const fetcher = (urlPath) => fetch(urlPath.join("")).then((res) => res.json());
 const hasAvatarFetcher = (urlPath) =>
   fetch(urlPath.join("")).then((res) => res.status === 200);
@@ -55,10 +40,7 @@ export default function ProfilePage() {
     ["/api/profile/", session?.user?.userId, "/avatar"],
     hasAvatarFetcher
   );
-  // const { trigger } = useSWRMutation(
-  //   ["/api/profile/", session?.user?.userId, "/avatar"],
-  //   uploadFile
-  // );
+
   const router = useRouter();
 
   const [refreshKey, setRefreshKey] = useState(Date.now());
