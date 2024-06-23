@@ -5,13 +5,25 @@ const Section = styled.section`
   text-align: center;
 `;
 
+const Headline = styled.h1`
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(75deg, transparent, orange, transparent);
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+`;
+
 export default function ProfileInfo({ session }) {
   if (!session) {
     return <></>;
   }
   return (
     <Section>
-      <h1 style={{ fontSize: "36px" }}>TV SHOW QUIZ</h1>
+      {/* <Headline style={{ fontSize: "36px" }}>TV SHOW GAME</Headline> */}
       {/* <h1>Hello {session.user?.name}</h1> */}
     </Section>
   );
