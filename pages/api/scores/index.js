@@ -18,6 +18,3 @@ export default async function handler(request, response) {
     return response.status(405).json({ message: "Method not allowed" });
   }
 }
-
-// useSession
-// getServerSession

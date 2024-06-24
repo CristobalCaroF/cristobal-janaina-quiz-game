@@ -75,7 +75,6 @@ export default function ProfilePage() {
     }
 
     const formElement = event.currentTarget;
-    // trigger(avatarImage);
 
     await fetch(`/api/profile/${session?.user?.userId}/avatar`, {
       method: "POST",
