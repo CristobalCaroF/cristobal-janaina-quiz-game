@@ -8,6 +8,7 @@ import homeIcon from "/public/home-black.png";
 import homeIconDark from "/public/home-white.png";
 import styled from "styled-components";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const NavBar = styled.nav`
   align-items: center;
@@ -57,7 +58,17 @@ export default function Nav({
   showProfile,
   showHome,
 }) {
+  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return;
+  }
+
   return (
     <NavBar>
       <Text>

@@ -8,6 +8,7 @@ import QuizModel from "@/db/models/Quiz";
 import Question from "@/db/models/Questions";
 import Nav from "@/components/Nav";
 import Container, { Box, Center } from "@/components/Container";
+import { useTheme } from "next-themes";
 
 const CardBox = styled.div`
   background: transparent;
