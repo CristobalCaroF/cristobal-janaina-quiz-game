@@ -192,7 +192,8 @@ export default function Quiz({ questions, quiz }) {
     if (answers[activeQuestion] !== undefined) {
       return;
     }
-    setAnswers([...answers, answer]);
+    const currentAnswer = [...answers, answer];
+    setAnswers(currentAnswer);
 
     if (activeQuestion + 1 === questions.length) {
       setIsRunning(false);
@@ -202,13 +203,13 @@ export default function Quiz({ questions, quiz }) {
       if (activeQuestion + 1 < questions.length) {
         setActiveQuestion(activeQuestion + 1);
       } else {
-        addScore();
+        addScore(currentAnswer);
         setShowResult(true);
       }
     }, 600);
   };
 
-  async function addScore() {
+  async function addScore(answers) {
     const today = new Date();
     const finalDate = today.toISOString().split("T")[0];
 
@@ -217,18 +218,18 @@ export default function Quiz({ questions, quiz }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user: session.user.userId,
-        score: score(),
+        score: score(answers),
         date: finalDate,
         quizId: quizId,
       }),
     });
   }
 
-  const score = () => {
-    return Math.max(countCorrectAnswers() * 1000 - time * 10, 0);
+  const score = (answers) => {
+    return Math.max(countCorrectAnswers(answers) * 1000 - time * 10, 0);
   };
 
-  const countCorrectAnswers = () => {
+  const countCorrectAnswers = (answers) => {
     return questions
       .map((question) => question.correct)
       .filter((correctAnswer, idx) => answers[idx] === correctAnswer).length;
@@ -280,12 +281,12 @@ export default function Quiz({ questions, quiz }) {
                 <Title>Results</Title>
               </div>
 
-              <h3>You win {score()} points!</h3>
+              <h3>You win {score(answers)} points!</h3>
               <h3 style={{ color: "#7ce6b5" }}>
-                Correct: {countCorrectAnswers()}
+                Correct: {countCorrectAnswers(answers)}
               </h3>
               <h3 style={{ color: "#ee5c5c" }}>
-                Wrong: {questions.length - countCorrectAnswers()}
+                Wrong: {questions.length - countCorrectAnswers(answers)}
               </h3>
               <h3>Time: {formatTime(time)}</h3>
               {/* </SectionResult> */}
