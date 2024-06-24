@@ -46,7 +46,7 @@ const ToggleContainer = styled.div`
 const Label = styled.label`
   margin-bottom: 10px;
   font-size: 12px;
-  color: #333;
+  color: var(--settingsFontColor);
 `;
 
 const DarkModeToggle = () => {
@@ -73,22 +73,5 @@ const DarkModeToggle = () => {
     </ToggleContainer>
   );
 };
-
-// const DarkModeToggle = () => {
-//   const { theme, setTheme } = useTheme();
-//   const [mounted, setMounted] = useState(false);
-
-//   useEffect(() => {
-//     setMounted(true);
-//   }, []);
-
-//   if (!mounted) return null;
-
-//   return (
-//     <ButtonDark onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-//       {theme === "light" ? "Dark Mode" : "Light Mode"}
-//     </ButtonDark>
-//   );
-// };
 
 export default DarkModeToggle;

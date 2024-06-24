@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import userIcon from "/public/userIcon.svg";
+import userIconDark from "/public/userIcon-white.svg";
 import highscoreIcon from "/public/highscore.svg";
+import highscoreIconDark from "/public/highscore-white.svg";
+import homeIconLight from "/public/home-black.png";
+import homeIconDark from "/public/home-white.png";
 import styled from "styled-components";
-import homeIcon from "/public/home-black.png";
+import { useTheme } from "next-themes";
 
 const NavBar = styled.nav`
   align-items: center;
@@ -53,6 +57,7 @@ export default function Nav({
   showProfile,
   showHome,
 }) {
+  const { theme } = useTheme();
   return (
     <NavBar>
       <Text>
@@ -64,7 +69,7 @@ export default function Nav({
           <Link href="/highscores">
             <Image
               priority
-              src={highscoreIcon}
+              src={theme === "dark" ? highscoreIconDark : highscoreIcon}
               alt="highscores"
               width={29}
               height={29}
@@ -75,7 +80,7 @@ export default function Nav({
           <Link href="/profile">
             <Image
               priority
-              src={userIcon}
+              src={theme === "dark" ? userIconDark : userIcon}
               alt="profile"
               width={30}
               height={30}
@@ -84,7 +89,12 @@ export default function Nav({
         )}
         {showHome && (
           <Link href="/">
-            <Image width={30} height={30} src={homeIcon} alt="home-page" />
+            <Image
+              width={30}
+              height={30}
+              src={theme === "dark" ? homeIconDark : homeIconLight}
+              alt="home-page"
+            />
           </Link>
         )}
       </Buttons>

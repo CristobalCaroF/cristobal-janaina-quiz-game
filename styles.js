@@ -16,33 +16,29 @@ export default createGlobalStyle`
     width: 100%;
     // max-width: 768px;
     font-family: "Montserrat", "DM Sans", verdana, sans-serif;
-    background-color: white;
+    background-color: var(--background);
     text-align: center;
     text-decoration: none;
     margin: 0px;
+    transition: background-color var(0.3s), color var(0.3s);
   }
+
+  html {
+  transition: background-color var(0.3s), color var(0.3s);
+}
 
 
 :root {
   /* Your default theme */
   --background: white;
   --foreground: black;
+  --settingsFontColor: #666
 }
 
 [data-theme='dark'] {
-  --background: black;
+  --background: #02001c;
   --foreground: white;
+  --settingsFontColor: white
 }
 
 `;
-
-// :root {
-//     --primary-color: #22babb;
-//     --secondary-color: #f24405;
-//     --primary-background: #d3d3d3;
-//   }
-
-// display:flex;
-//     justify-content: center;
-//     text-align: center;
-// width: 100vw;

@@ -50,15 +50,15 @@ export default function Instructions({ onClick }) {
 
         <OlInstru>
           <LiInstru>
-            There are 10 questions about your favorite TV Show
+            You'll answer 10 questions about your favorite TV Show
           </LiInstru>
           <LiInstru>For each correct answer, you earn 1000 points</LiInstru>
           <LiInstru>
-            You lose 10 points for ever second you spend playing
+            You lose 10 points for every second you spend playing
           </LiInstru>
         </OlInstru>
         <p>
-          <i>"So hurry up to score more points"</i>
+          <i>"So, hurry up to score more points!"</i>
         </p>
 
         <ButtonDiv>

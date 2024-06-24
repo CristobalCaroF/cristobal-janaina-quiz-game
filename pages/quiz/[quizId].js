@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import useSWR from "swr";
 import { useEffect, useState } from "react";
-import Link from "next/link.js";
-import useRandomQuestions from "@/utils/useRandomQuestions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Instructions from "@/components/Instructions";
 import dbConnect from "@/db/dbConnect";
 import QuizModel from "@/db/models/Quiz";
 import Question from "@/db/models/Questions";
-import mongoose from "mongoose";
 import Nav from "@/components/Nav";
 import Container, { Box, Center } from "@/components/Container";
 
@@ -226,10 +222,6 @@ export default function Quiz({ questions, quiz }) {
         quizId: quizId,
       }),
     });
-
-    // if (response.ok) {
-    //   mutate();
-    // }
   }
 
   const score = () => {
