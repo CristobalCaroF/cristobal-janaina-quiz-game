@@ -32,6 +32,7 @@ export default createGlobalStyle`
   /* Your default theme */
   --background: white;
   --foreground: black;
+  --settingsFontColor: #666
 }
 
 [data-theme='dark'] {
