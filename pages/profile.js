@@ -87,7 +87,7 @@ export default function ProfilePage() {
     setTimeout(() => {
       mutate();
       setRefreshKey(Date.now());
-    }, 1000);
+    }, 3000);
     formElement.reset();
   }
 
