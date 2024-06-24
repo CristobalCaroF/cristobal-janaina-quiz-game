@@ -64,7 +64,7 @@ export default function HighScores({ scores, quizzes }) {
       <Nav title="Highscores" showHome={true} />
       <Container>
         <div>
-          Quiz:
+          <p>Quiz: </p>
           <select
             onChange={(e) => {
               handleQuizFilter(e.target.value);

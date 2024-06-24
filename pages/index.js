@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import styled from "styled-components";
 import Container from "@/components/Container";
-import LoginButton from "@/components/LoginButton";
 
 const ImageContainer = styled.div`
   display: flex;
@@ -29,8 +28,6 @@ const Imagens = styled.img`
 export default function Home() {
   const { data: session } = useSession();
   const { data: quizzes } = useSWR("/api/quizzes");
-
-  // console.log(quizzes);
 
   if (!session) {
     return <SignIn />;

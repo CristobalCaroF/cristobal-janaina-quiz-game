@@ -4,7 +4,7 @@ import userIcon from "/public/userIcon.svg";
 import userIconDark from "/public/userIcon-white.svg";
 import highscoreIcon from "/public/highscore.svg";
 import highscoreIconDark from "/public/highscore-white.svg";
-import homeIconLight from "/public/home-black.png";
+import homeIcon from "/public/home-black.png";
 import homeIconDark from "/public/home-white.png";
 import styled from "styled-components";
 import { useTheme } from "next-themes";
@@ -92,7 +92,7 @@ export default function Nav({
             <Image
               width={30}
               height={30}
-              src={theme === "dark" ? homeIconDark : homeIconLight}
+              src={theme === "dark" ? homeIconDark : homeIcon}
               alt="home-page"
             />
           </Link>

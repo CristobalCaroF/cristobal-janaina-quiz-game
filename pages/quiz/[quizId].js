@@ -10,8 +10,6 @@ import Nav from "@/components/Nav";
 import Container, { Box, Center } from "@/components/Container";
 
 const CardBox = styled.div`
-  // width: 400px; /* Largura fixa */
-  // height: auto; /* Altura fixa */
   background: transparent;
   border: 2px solid orange;
   border-radius: 6px;
@@ -263,7 +261,6 @@ export default function Quiz({ questions, quiz }) {
                 key={idx}
                 onClick={() => onAnswerSelected(answer, idx)}
                 isSelected={answers[activeQuestion] === answer}
-                // disabled={selectedAnswer !== null}
                 isCorrect={answer === questions[activeQuestion].correct}
                 style={{ listStyleType: "none" }}
               >
@@ -275,8 +272,6 @@ export default function Quiz({ questions, quiz }) {
         {showResult && (
           <Center>
             <Box>
-              {/* // <Results result={result} /> */}
-              {/* <SectionResult> */}
               <div>
                 <Title>Results</Title>
               </div>
@@ -289,7 +284,6 @@ export default function Quiz({ questions, quiz }) {
                 Wrong: {questions.length - countCorrectAnswers(answers)}
               </h3>
               <h3>Time: {formatTime(time)}</h3>
-              {/* </SectionResult> */}
             </Box>
           </Center>
         )}
